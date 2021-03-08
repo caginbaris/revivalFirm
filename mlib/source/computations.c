@@ -90,18 +90,3 @@ double thermal_status(double rms, thermal_parameters therm, double mem){
 
 
 
-/* *matlab curve fit*
-
-General model Rat01:
-     f(x) = (p1) / (x + q1)
-Coefficients (with 95% confidence bounds):
-       p1 =       115.1  (104.9, 125.3)
-       q1 =      0.6309  (0.545, 0.7168)
-*/
-
-double V2T(double x){
-
-return 115.1/(0.6309+x);
-
-}
-
