@@ -20,8 +20,7 @@ typedef struct piInit{
 		double refLimitUp;
 		double refLimitDown;
 		
-		double antiWindUp_Up;
-		double antiWindUp_Down;
+		double rateLimit;
 		
 		double outputLimitUp;
 		double outputLimitDown;
@@ -34,7 +33,6 @@ typedef struct piInit{
 		
 		uint32_t refLimitEnable:1;
 		uint32_t outputLimitEnable:1;
-
 		uint32_t feedBackReversal:1;
 		uint32_t outputReversal:1;
 		
@@ -52,6 +50,7 @@ typedef struct piData{
 	struct{	
 
 		double ref;
+		double ref_rateLimited;
 		double feedback;	
 		double controllerOutput;
 		double atRestOutput;
@@ -81,8 +80,7 @@ typedef struct piData{
 		double refLimitUp;
 		double refLimitDown;
 		
-		double antiWindUp_Up;
-		double antiWindUp_Down;
+		double rateLimit;
 		
 		double outputLimitUp;
 		double outputLimitDown;
@@ -97,12 +95,13 @@ typedef struct piData{
 		uint32_t refLimitEnable:1;
 		uint32_t outputLimitEnable:1;
 		
-		uint32_t outputLimiting:1;
-		uint32_t refLimiting:1;
-
-		
 		uint32_t feedBackReversal:1;
 		uint32_t outputReversal:1;
+		
+		uint32_t refLimiting:1;
+		uint32_t outputLimiting:1;
+
+
 		uint32_t rem:25;
 		
 	}flag;

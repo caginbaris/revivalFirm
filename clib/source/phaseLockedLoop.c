@@ -2,8 +2,8 @@
 #include "clib.h"
 
 
-#define fo_lp_a 0.9950 //fc=20 for 25e3
-#define fo_lp_b 0.0025 //fs/2=>fc/2
+#define fo_lp_a 0.997489878867098 //fc=20 for 50e3
+#define fo_lp_b 0.001255060566451 //fs/2=>fc/2
 
 #define Kp 100.0
 #define Ki 100.0
@@ -21,9 +21,9 @@ void PLL_initialization(pll_parameters* pll, double ts){
 
 double PLL_theta (double Vpll,double Vrms , double theta,pll_parameters* pll){
 
-	double Vd_pll=0.0;
+	double Vd_pll;
 
-	Vd_pll=(Vrms>1.0)?(Vpll*cosf(theta)/Vrms):(0.0);
+	Vd_pll=(Vrms>1.0)?(Vpll*cos(theta)/Vrms):(0.0);
 	 
 	
 	pll->Vdf=pll->Vdf*(fo_lp_a)+(Vd_pll + pll->Vd)*fo_lp_b;

@@ -3,8 +3,6 @@
 
 
 
-
-
 void piControllerInitialization(piData* pi,piInit init){
 	
 	
@@ -16,8 +14,7 @@ void piControllerInitialization(piData* pi,piInit init){
 	pi->limit.refLimitUp=init.limit.refLimitUp;
 	pi->limit.refLimitDown=init.limit.refLimitDown;
 	
-	pi->limit.antiWindUp_Up=init.limit.antiWindUp_Up;
-	pi->limit.antiWindUp_Down=init.limit.antiWindUp_Down;
+	pi->limit.rateLimit=init.limit.rateLimit;
 	
 	pi->limit.outputLimitUp=init.limit.outputLimitUp;
 	pi->limit.outputLimitDown=init.limit.outputLimitDown;
@@ -30,9 +27,27 @@ void piControllerInitialization(piData* pi,piInit init){
 }
 
 
+//maxRate in unit per second
+double rateLimiter(double x,double xz, double maxRate, double ts){
+
+    float out,rate,dir;
+
+    rate=(x-xz)/ts;
+
+    dir=(rate>0)?(1.0f):(-1.0f);
+
+    rate*=dir;
+
+    out=(rate> maxRate)?(xz+maxRate*dir*ts):(x);
+
+    return out;
+
+}
+
+
 void piControllerImplementaiton(piData* pi){
 	
-double q=1.0;
+
 	
 if(pi->flag.enable){
 	
@@ -43,35 +58,30 @@ if(pi->flag.enable){
 	pi->flag.refLimiting=passive;
 		
 	if((pi->signal.ref)>(pi->limit.refLimitUp))  {(pi->signal.ref)=(pi->limit.refLimitUp)  ; (pi->flag.refLimiting)=active;}
-	if((pi->signal.ref)<(pi->limit.refLimitDown)){(pi->signal.ref)=(pi->limit.refLimitDown); (pi->flag.refLimiting)=active;}		
-	
-	}
+	if((pi->signal.ref)<(pi->limit.refLimitDown)){(pi->signal.ref)=(pi->limit.refLimitDown); (pi->flag.refLimiting)=active;}
 
+	}
+	
+	//reference rate limiting
+	
+	pi->signal.ref_rateLimited=rateLimiter(pi->signal.ref,pi->signal.ref_rateLimited,pi->limit.rateLimit,pi->parameter.ts);
+		
 	//feedbback signal reversal
 	
 	if(pi->flag.feedBackReversal){pi->signal.feedback=-pi->signal.feedback;}
 
 	//controller operation
 	
-	pi->state.error=((pi->signal.ref)-(pi->signal.feedback));
+	pi->state.error=((pi->signal.ref_rateLimited)-(pi->signal.feedback));
 	
 	pi->state.Pout=(pi->parameter.Kp)*(pi->state.error);
 	
-	//anti-windup
-	
-	q=1.0;
-	
-	if(pi->state.error>pi->limit.antiWindUp_Up)  {q=0.0f;}
-	if(pi->state.error<pi->limit.antiWindUp_Down){q=0.0f;}
-	
-	pi->state.Iout+=(pi->parameter.ts)*(pi->parameter.Ki*q)*(pi->state.error);
+	pi->state.Iout+=(pi->parameter.ts)*(pi->parameter.Ki)*(pi->state.error);
 	
 	//integral limiting
 	
-		
 	if((pi->state.Iout)>(pi->limit.outputLimitUp))  {(pi->state.Iout)=(pi->limit.outputLimitUp)  ;}
 	if((pi->state.Iout)<(pi->limit.outputLimitDown)){(pi->state.Iout)=(pi->limit.outputLimitDown);}		
-	
 	
 	//output calculation
 	
