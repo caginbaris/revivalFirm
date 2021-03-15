@@ -1,0 +1,6 @@
+transformation input a,b,c=1*sin(theta) with theta pll
+transformation output  d=1.224 peak
+3phase power invariant sqrt(3)*Vpp*Iline=Vd*Id
+
+
+

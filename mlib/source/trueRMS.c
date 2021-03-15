@@ -7,7 +7,7 @@
 // delayLineCounter global counter for true rms calculation
 // length of delayLineArray - mult. inverse can be u
 
-double trueRMS(double rtInput, double *delayLineArray, uint16_t delayLineCounter, uint16_t arrayLength){
+double trueRMS_windowed(double rtInput, double *delayLineArray, uint16_t delayLineCounter, uint16_t arrayLength){
 
 	uint16_t i=0;
 	double rms = 0.0, rms_sum = 0.0, rms_data=0.0;
@@ -28,3 +28,16 @@ double trueRMS(double rtInput, double *delayLineArray, uint16_t delayLineCounter
 
 }
 
+void trueRMS_sampled(double input,trueRMS_sampled_parameters* rms,uint16_t seq){
+
+    rms->sum+=input*input;
+
+    if(seq==1){
+
+        rms->out=sqrt(rms->sum*invN);
+        rms->sum=0;
+
+    }
+
+
+}
