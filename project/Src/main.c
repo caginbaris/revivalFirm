@@ -130,20 +130,6 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		
-		if(dummyCheck){
-		
-		HAL_GPIO_WritePin(extOutputSSR_GPIO_Port,extOutputSSR_Pin,(GPIO_PinState)1);
-			
-		}else{
-		
-		
-		HAL_GPIO_WritePin(extOutputSSR_GPIO_Port,extOutputSSR_Pin,(GPIO_PinState)0);
-			
-		}
-		
-
-		HAL_Delay(50);
 
     /* USER CODE BEGIN 3 */
   }

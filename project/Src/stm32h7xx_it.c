@@ -59,6 +59,7 @@
 extern DMA_HandleTypeDef hdma_adc1;
 extern DMA_HandleTypeDef hdma_adc3;
 extern COMP_HandleTypeDef hcomp1;
+extern COMP_HandleTypeDef hcomp2;
 extern TIM_HandleTypeDef htim2;
 /* USER CODE BEGIN EV */
 
@@ -222,6 +223,8 @@ void DMA1_Stream0_IRQHandler(void)
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
+	
+	HAL_GPIO_TogglePin(LD1_GPIO_Port,LD1_Pin);
 
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
@@ -253,6 +256,7 @@ void COMP_IRQHandler(void)
 
   /* USER CODE END COMP_IRQn 0 */
   HAL_COMP_IRQHandler(&hcomp1);
+  HAL_COMP_IRQHandler(&hcomp2);
   /* USER CODE BEGIN COMP_IRQn 1 */
 
   /* USER CODE END COMP_IRQn 1 */

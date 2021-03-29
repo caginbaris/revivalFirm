@@ -65,7 +65,7 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
 	
 	}
 	
-	if(hadc->Instance==ADC1){
+	if(hadc->Instance==ADC3){
 	/* Invalidate Data Cache to get the updated content of the SRAM on the first half of the ADC converted data buffer: 32 bytes */
   SCB_InvalidateDCache_by_Addr((uint32_t *) &aADC3ConvertedData[0], ADC3CONVERTEDVALUES_BUFFER_SIZE);
 	}
@@ -98,7 +98,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	
 	//****
 	
-	readAdc();
+	//readAdc();
 	mainFlow();
 	
 	}
@@ -128,7 +128,7 @@ void initAdc(void){
   }
 	
 	
-	if (HAL_ADCEx_Calibration_Start(&hadc2, ADC_CALIB_OFFSET, ADC_SINGLE_ENDED) != HAL_OK){
+	if (HAL_ADCEx_Calibration_Start(&hadc2, ADC_CALIB_OFFSET, ADC_DIFFERENTIAL_ENDED) != HAL_OK){
     /* Calibration Error */
     Error_Handler();
   }
@@ -154,6 +154,7 @@ void initAdc(void){
   }
 	
 	
+	#if 0
 	
 	HAL_TIM_Base_Start(&htim4);
 	
@@ -164,6 +165,8 @@ void initAdc(void){
   {
     Error_Handler();
   }
+	
+	#endif	
 
 }
 
