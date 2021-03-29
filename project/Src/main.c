@@ -52,6 +52,8 @@
 
 /* USER CODE BEGIN PV */
 
+uint8_t dummyCheck=0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -118,6 +120,8 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
+	
+	initAdc();
 
   /* USER CODE END 2 */
 
@@ -127,8 +131,19 @@ int main(void)
   {
     /* USER CODE END WHILE */
 		
-		HAL_GPIO_TogglePin(LD1_GPIO_Port,LD1_Pin);
-		HAL_Delay(100);
+		if(dummyCheck){
+		
+		HAL_GPIO_WritePin(extOutputSSR_GPIO_Port,extOutputSSR_Pin,(GPIO_PinState)1);
+			
+		}else{
+		
+		
+		HAL_GPIO_WritePin(extOutputSSR_GPIO_Port,extOutputSSR_Pin,(GPIO_PinState)0);
+			
+		}
+		
+
+		HAL_Delay(50);
 
     /* USER CODE BEGIN 3 */
   }
