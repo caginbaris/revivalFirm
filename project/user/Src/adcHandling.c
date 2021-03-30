@@ -98,7 +98,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	
 	//****
 	
-	//readAdc();
+	readAdc();
 	mainFlow();
 	
 	}
@@ -180,7 +180,7 @@ void readAdc(void){
 	adc.ch.Vcn=scale.ch.Vcn*((double)aADCxConvertedValues[seq_Vcn]);
 	adc.ch.Vdc=scale.ch.Vdc*((double)aADCxConvertedValues[seq_Vdc]);
 	
-	adc.ch.Ia=scale.ch.Ia*((double)aADCyConvertedValues[seq_Ia]);
+	adc.ch.Ia=0.00621664*((double)aADCyConvertedValues[seq_Ia]-32767);
 	adc.ch.Ib=scale.ch.Ib*((double)aADCyConvertedValues[seq_Ib]);
 	adc.ch.Ic=scale.ch.Ic*((double)aADCyConvertedValues[seq_Ic]);
 	
