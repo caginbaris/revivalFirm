@@ -130,6 +130,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+		
+		HAL_Delay(100);
+		
+		HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin,GPIO_PIN_RESET);
 
     /* USER CODE BEGIN 3 */
   }

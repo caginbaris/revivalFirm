@@ -4,6 +4,9 @@
 #include "tim.h"
 
 
+uint64_t c1=0,c2=0;
+
+
 #define ADCCONVERTEDVALUES_BUFFER_SIZE ((uint32_t)  4)    /* Size of array containing ADC converted values */
 #define ADC3CONVERTEDVALUES_BUFFER_SIZE ((uint32_t)  5)    /* Size of array containing ADC converted values */
 
@@ -97,9 +100,15 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	
 	
 	//****
+	HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin,GPIO_PIN_SET);
 	
 	readAdc();
 	mainFlow();
+	c1++;	
+	
+	
+	
+	HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin,GPIO_PIN_RESET);
 	
 	}
 	
@@ -116,6 +125,17 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 }
 
 
+  void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc)
+{
+  /* Set variable to report analog watchdog out of window status to main      */
+  /* program.                                                                 */
+  if(hadc->Instance==ADC2){
+	
+	HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin,GPIO_PIN_SET);
+	c2++;	
+	
+	}
+}
 
 
 
@@ -180,7 +200,7 @@ void readAdc(void){
 	adc.ch.Vcn=scale.ch.Vcn*((double)aADCxConvertedValues[seq_Vcn]);
 	adc.ch.Vdc=scale.ch.Vdc*((double)aADCxConvertedValues[seq_Vdc]);
 	
-	adc.ch.Ia=0.00621664*((double)aADCyConvertedValues[seq_Ia]-32767);
+	adc.ch.Ia=1.03734*0.00621664*((double)aADCyConvertedValues[seq_Ia]-32768);
 	adc.ch.Ib=scale.ch.Ib*((double)aADCyConvertedValues[seq_Ib]);
 	adc.ch.Ic=scale.ch.Ic*((double)aADCyConvertedValues[seq_Ic]);
 	

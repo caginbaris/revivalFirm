@@ -56,8 +56,9 @@ typedef struct thermal_parameters{
 void cs_computations(phase_cs_in p_in,phase_cs_out *p_out );
 void sym_comp(phase_cs_in pa, phase_cs_in pb,phase_cs_in pc,sym_out*sym);
 void sym_mag(sym_out sym, sym_out *sym_back, sym_out *sym_rms  );
+double frequencyMeasurement(double input,double samplingFrequency);
 double thermal_status(double rms,thermal_parameters therm, double mem);
-double V2T(double x);
+
 
 //macros
 

@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 
-double trueRMS_windowed(double rtInput, double *delayLineArray, uint16_t delayLineCounter, uint16_t arrayLength);
 
 typedef struct trueRMS_sampled_parameters{
 
@@ -13,6 +12,10 @@ typedef struct trueRMS_sampled_parameters{
 
 
 }trueRMS_sampled_parameters;
+
+void trueRMS_sampled(double input,trueRMS_sampled_parameters* rms,uint16_t seq);
+
+
 
 #endif
 

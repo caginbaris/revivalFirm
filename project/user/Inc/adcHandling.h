@@ -67,7 +67,7 @@ typedef union adcData_Type{
 }adcData_Type;
 
 
-
+extern adcData_Type adc;
 
 #endif
 
