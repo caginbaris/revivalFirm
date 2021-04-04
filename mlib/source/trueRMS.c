@@ -47,3 +47,4 @@ void trueRMS_sampled(double input,trueRMS_sampled_parameters* rms,uint16_t seq){
 
 
 }
+

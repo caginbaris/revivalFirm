@@ -5,8 +5,11 @@
 trueRMS_sampled_parameters rms1={0,0,1};
 trueRMS_sampled_parameters rms2={0,0,2};
 trueRMS_sampled_parameters rms3={0,0,3};
+trueRMS_sampled_parameters rms4={0,0,4};
+trueRMS_sampled_parameters rms5={0,0,5};
+trueRMS_sampled_parameters rms6={0,0,6};
 
-
+void frequency(void);
 
 void mainFlow(void){
 	
@@ -26,5 +29,10 @@ void mainFlow(void){
 		trueRMS_sampled(adc.ch.Ia,&rms1,periodCounter);
 		trueRMS_sampled(adc.ch.Ia,&rms2,periodCounter);
 		trueRMS_sampled(adc.ch.Ia,&rms3,periodCounter);
+
+
+		frequency();
+
+
 
 }

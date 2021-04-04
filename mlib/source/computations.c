@@ -66,29 +66,7 @@ void sym_mag( sym_out sym,  sym_out *sym_back,  sym_out *sym_rms  ){
 
 }
 
-//cau only for single invacation
-double frequencyMeasurement(double input,double samplingFrequency){
 
-    static uint32_t pulseCount=0;
-    static double fundamentalFrequency=0;
-
-    static uint8_t  inputBack=0;
-    uint8_t inputPolarity=0;
-
-    inputPolarity=input>0?1:0;
-
-    if(inputPolarity==1 && inputBack==0){
-
-        fundamentalFrequency=samplingFrequency/((double)(pulseCount));
-        pulseCount=0;
-
-    }else{
-
-        pulseCount++;
-
-    }
-
-}
 
 
 double thermal_status(double rms, thermal_parameters therm, double mem){

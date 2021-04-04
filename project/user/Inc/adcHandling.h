@@ -12,9 +12,8 @@ typedef enum adcSeq_Type {  seq_Van=0,
                             seq_NTCa=0,
                             seq_NTCb=1,  
                             seq_NTCc=2,
-	
                             seq_v5=3,
-                            seq_vTemp=4,
+
                         
 }adcSeq_Type;
 
@@ -33,7 +32,7 @@ typedef enum adcChannel_Type {  ch_Van=0,
 																ch_NTCc=9,
 	
 																ch_v5=10,
-																ch_vTemp=11,
+
                         
 }adcChannel_Type;
 
@@ -56,13 +55,13 @@ typedef union adcData_Type{
 		double NTCb;
 		double NTCc;
 		double v5;
-		double vTemp;
+
 		
 
 	}ch;
 	
 	
-	double all[12];
+	double all[11];
 
 }adcData_Type;
 
