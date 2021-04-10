@@ -177,7 +177,7 @@ void initAdc(void){
 	scale.ch.Vcn=1;
 	scale.ch.Vdc=1;
 	
-	scale.ch.Ia=0.00621664;
+	scale.ch.Ia=0.00621664*0.991; //cau not 3.3v , 3.27v act
 	scale.ch.Ib=0.00621664;;
 	scale.ch.Ic=0.00621664;;
 	
