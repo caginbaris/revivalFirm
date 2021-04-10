@@ -66,8 +66,9 @@ typedef union adcData_Type{
 }adcData_Type;
 
 
-extern adcData_Type adc;
+extern volatile adcData_Type adc;
 
 #endif
 
 
+void adc3initiateConversion(void);

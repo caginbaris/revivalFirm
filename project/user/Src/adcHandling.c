@@ -34,11 +34,11 @@ uint64_t c1=0,c2=0;
 ALIGN_32BYTES(volatile uint32_t   aADCDualConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE]);    /* ADC dual mode interleaved conversion results (ADC master and ADC slave results concatenated on data register 32 bits of ADC master). */
 ALIGN_32BYTES(volatile uint16_t   aADCxConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE]);       /* For the purpose of this example, dispatch dual conversion values into arrays corresponding to each ADC conversion values. */
 ALIGN_32BYTES(volatile uint16_t   aADCyConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE]);       /* For the purpose of this example, dispatch dual conversion values into arrays corresponding to each ADC conversion values. */
-ALIGN_32BYTES(volatile uint16_t   aADC3ConvertedData[ADC3CONVERTEDVALUES_BUFFER_SIZE]);
+ALIGN_32BYTES(static uint32_t   aADC3ConvertedData[ADC3CONVERTEDVALUES_BUFFER_SIZE]);
 
 
 adcChannel_Type ch=ch_Van;
-adcData_Type adc={0};
+volatile adcData_Type adc={0};
 adcData_Type scale={0};
 
 
@@ -47,10 +47,13 @@ void readAdc3(void);
 
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc){
 	
+
+	
 	if(hadc->Instance==ADC1){
-  /* Invalidate Data Cache to get the updated content of the SRAM on the first half of the ADC converted data buffer: 32 bytes */ 
-  SCB_InvalidateDCache_by_Addr((uint32_t *) &aADCDualConvertedValues[0], 4*ADCCONVERTEDVALUES_BUFFER_SIZE/2);
-  
+		
+		/* Invalidate Data Cache to get the updated content of the SRAM on the first half of the ADC converted data buffer: 32 bytes */ 
+  SCB_InvalidateDCache_by_Addr((uint32_t *) &aADCDualConvertedValues[0], 4*ADCCONVERTEDVALUES_BUFFER_SIZE/2);	
+
 
   uint32_t tmp_index = 0;
   
@@ -65,9 +68,13 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc){
 	}
 	
 	if(hadc->Instance==ADC3){
-	/* Invalidate Data Cache to get the updated content of the SRAM on the first half of the ADC converted data buffer: 32 bytes */
-  SCB_InvalidateDCache_by_Addr((uint32_t *) &aADC3ConvertedData[0], ADC3CONVERTEDVALUES_BUFFER_SIZE);
+		
+		/* Invalidate Data Cache to get the updated content of the SRAM on the first half of the ADC converted data buffer: 32 bytes */
+  SCB_InvalidateDCache_by_Addr((uint32_t *) &aADC3ConvertedData[0], 2*ADC3CONVERTEDVALUES_BUFFER_SIZE);
+
 	}
+	
+
 
 }
 
@@ -75,9 +82,14 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc){
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	
+
+
+	
+	
+	
 	if(hadc->Instance==ADC1){
 	
-   /* Invalidate Data Cache to get the updated content of the SRAM on the second half of the ADC converted data buffer: 32 bytes */ 
+		/* Invalidate Data Cache to get the updated content of the SRAM on the second half of the ADC converted data buffer: 32 bytes */ 
   SCB_InvalidateDCache_by_Addr((uint32_t *) &aADCDualConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE/2], 4*ADCCONVERTEDVALUES_BUFFER_SIZE/2);
   
   uint32_t tmp_index = 0;
@@ -93,10 +105,12 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
  
 	//****
 	
-	HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin,GPIO_PIN_SET);
+	
 	readAdc12();
+	HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin,GPIO_PIN_SET);
 	mainFlow();
 	HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin,GPIO_PIN_RESET);
+	
 	
 	c1++;	
 	
@@ -105,13 +119,15 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	}
 	
 	
+	
+	
 	if(hadc->Instance==ADC3){
-	
-	/* Invalidate Data Cache to get the updated content of the SRAM on the second half of the ADC converted data buffer: 32 bytes */
 		
-  SCB_InvalidateDCache_by_Addr((uint32_t *) &aADC3ConvertedData[ADC3CONVERTEDVALUES_BUFFER_SIZE/2], ADC3CONVERTEDVALUES_BUFFER_SIZE);
+		/* Invalidate Data Cache to get the updated content of the SRAM on the second half of the ADC converted data buffer: 32 bytes */
+	SCB_InvalidateDCache_by_Addr((uint32_t *) &aADC3ConvertedData[ADC3CONVERTEDVALUES_BUFFER_SIZE/2], 2*ADC3CONVERTEDVALUES_BUFFER_SIZE);	
+		
+
 	readAdc3();	
-	
 	HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);		
 	c2++;		
 	
@@ -127,13 +143,30 @@ void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc){
   /* program.                                                                 */
   if(hadc->Instance==ADC2){
 	
-	HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin,GPIO_PIN_SET);
+	HAL_GPIO_TogglePin(LD3_GPIO_Port,LD3_Pin);
 	
 	
 	}
 }
 
 
+
+
+void adc3initiateConversion(void){
+
+
+
+
+  if (HAL_ADC_Start_DMA(&hadc3,
+                        (uint32_t *)aADC3ConvertedData,
+                        ADC3CONVERTEDVALUES_BUFFER_SIZE
+                       ) != HAL_OK){
+    Error_Handler();
+		
+											 }
+	
+	
+}
 
 void initAdc(void){
 	
@@ -148,7 +181,7 @@ void initAdc(void){
 	scale.ch.Ib=0.00621664;;
 	scale.ch.Ic=0.00621664;;
 	
-	scale.ch.NTCa=1;
+	scale.ch.NTCa=1.65/32767.0;
 	scale.ch.NTCb=1;
 	scale.ch.NTCc=1;
 	scale.ch.v5=1;
@@ -191,10 +224,13 @@ void initAdc(void){
   }
 	
 
+	HAL_TIM_Base_Start_IT(&htim4);
+	
 	#if 1
 	
+
 	/* Start TIM4*/
-	HAL_TIM_Base_Start_IT(&htim4);
+	
   if (HAL_ADC_Start_DMA(&hadc3,
                         (uint32_t *)aADC3ConvertedData,
                         ADC3CONVERTEDVALUES_BUFFER_SIZE

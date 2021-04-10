@@ -1,6 +1,12 @@
 #include "main.h"
 #include "mlib.h"
 #include "adcHandling.h"
+#include "tim.h"
+
+
+uint32_t cycleCount;
+double cpuLoading;
+
 
 trueRMS_sampled_parameters rms1={0,0,1};
 trueRMS_sampled_parameters rms2={0,0,2};
@@ -16,14 +22,17 @@ void mainFlow(void){
 		static uint16_t periodCounter=0;
 	
 	
-		if(HAL_GPIO_ReadPin(PWRGD_24v_GPIO_Port,PWRGD_24v_Pin) == 1){
+	  // mainflow function start 
 	
-			
-		
-		}
+	
+		cycleCount=htim2.Instance->CNT;
 		
 		
 		if(++periodCounter==1000){periodCounter=0;}
+		
+		
+		frequency();
+		
 		
 		
 		trueRMS_sampled(adc.ch.Ia,&rms1,periodCounter);
@@ -31,8 +40,14 @@ void mainFlow(void){
 		trueRMS_sampled(adc.ch.Ia,&rms3,periodCounter);
 
 
-		frequency();
 
+		
+		
+		cycleCount=htim2.Instance->CNT-cycleCount;
+		cpuLoading=100.0*(double)(cycleCount)/(double)(htim2.Init.Period);
+		
+		
+		// mainflow function start 
 
 
 }
