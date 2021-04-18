@@ -71,4 +71,6 @@ extern volatile adcData_Type adc;
 #endif
 
 
-void adc3initiateConversion(void);
+void initAdc(void);
+
+

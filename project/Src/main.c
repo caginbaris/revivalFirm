@@ -31,7 +31,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "adcHandling.h"
+#include "pwmGeneration.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -125,6 +126,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	
 	initAdc();
+	modulatorEnable();
 
   /* USER CODE END 2 */
 

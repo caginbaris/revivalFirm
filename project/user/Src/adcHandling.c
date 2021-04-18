@@ -148,26 +148,6 @@ void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc){
 	
 	}
 }
-
-
-
-
-void adc3initiateConversion(void){
-
-
-
-
-  if (HAL_ADC_Start_DMA(&hadc3,
-                        (uint32_t *)aADC3ConvertedData,
-                        ADC3CONVERTEDVALUES_BUFFER_SIZE
-                       ) != HAL_OK){
-    Error_Handler();
-		
-											 }
-	
-	
-}
-
 void initAdc(void){
 	
 	//****scalings start
