@@ -39,9 +39,6 @@ typedef union digitalOutputs{
 	
 	struct{
 	
-		uint32_t LD1:1;
-		uint32_t LD2:1;
-		uint32_t LD3:1;
 		uint32_t rst:1;
 		uint32_t mcb_in:1;
 		uint32_t ext_SSR:1;
@@ -60,8 +57,8 @@ typedef union digitalOutputs{
 }digitalOutputs; 
 
 
-extern digitalInputs input;
-extern digitalOutputs output;
+extern digitalInputs DI;
+extern digitalOutputs DO;
 
 
 

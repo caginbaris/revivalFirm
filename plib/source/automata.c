@@ -139,7 +139,14 @@ void fToggle(uint8_t input, delay_parameters* p) {
 }
 
 
+void ui_limiter(uint16_t* parameter,uint16_t downLimit,uint16_t upLimit){
 
+
+	if((*parameter)<=downLimit){*parameter=downLimit;}
+	if((*parameter)>  upLimit){*parameter=  upLimit;}
+
+
+}
 
 
 

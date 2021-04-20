@@ -1,9 +1,10 @@
 #include "stm32h7xx_hal.h"
 #include "tim.h"
 #include "pwmGeneration.h"
+#include "plib.h"
 
 
-#define wscale 1199
+
 
 
 uint16_t sw_count_a=300;
@@ -52,6 +53,9 @@ void modulator(void){
 	sw_count_c=wscale*(final.c+ref.Vdc*0.5)/ref.Vdc;
 	*/
 	
+	ui_LIMITER(sw_count_a,0,wscale);
+	ui_LIMITER(sw_count_b,0,wscale);
+	ui_LIMITER(sw_count_c,0,wscale);
 	
 	
 	__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1, sw_count_a);

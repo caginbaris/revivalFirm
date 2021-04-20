@@ -63,9 +63,8 @@ on_off_delay(HAL_GPIO_ReadPin(HB3nIn_GPIO_Port,HB3nIn_Pin),&inputDelay[13]);
 HAL_GPIO_WritePin(extOutputREL_GPIO_Port,extOutputREL_Pin,(GPIO_PinState)DO.bit.ext_REL);
 HAL_GPIO_WritePin(extOutputSSR_GPIO_Port,extOutputSSR_Pin,(GPIO_PinState)DO.bit.ext_SSR);
 HAL_GPIO_WritePin(HB_RST_GPIO_Port,HB_RST_Pin,(GPIO_PinState)DO.bit.rst);
-HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin,(GPIO_PinState)DO.bit.LD1);
-HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin,(GPIO_PinState)DO.bit.LD2);
-HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin,(GPIO_PinState)DO.bit.LD3);
+
+
 HAL_GPIO_WritePin(MCB_in_GPIO_Port,MCB_in_Pin,(GPIO_PinState)DO.bit.mcb_in);
 
 

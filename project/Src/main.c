@@ -33,6 +33,8 @@
 /* USER CODE BEGIN Includes */
 #include "adcHandling.h"
 #include "pwmGeneration.h"
+#include "LEDs.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -138,14 +140,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 		
-		
-		if(HAL_DMA_GetState(&hdma_adc1)!=HAL_DMA_STATE_BUSY){
-			
-			
-		
-		
-		}
-		
+		LEDs();	
 		
   }
   /* USER CODE END 3 */

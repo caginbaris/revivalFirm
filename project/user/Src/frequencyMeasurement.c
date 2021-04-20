@@ -17,7 +17,7 @@ static uint32_t pulseCount=0;
 
 //cau only for single invocation
 
-void frequencyMeasurement(double input,double *output,double samplingFrequency){
+void frequency(double input,double *output,double samplingFrequency){
 
 
 
@@ -38,32 +38,18 @@ void frequencyMeasurement(double input,double *output,double samplingFrequency){
 			}	
 			
 
-			
 		pulseCount++;
  
 
-
-
 }
 
 
-void frequency(void){
+void frequencyMeasurement(void){
 
 
 fSignal=sos_implementation(adc.ch.Ia ,fSignal,coeffs, &bp);
-frequencyMeasurement(fSignal,&fundamentalFrequency,50000.0);
+frequency(fSignal,&fundamentalFrequency,50000.0);
 	
-if(fundamentalFrequency>40.0)	{
-
-	HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin,GPIO_PIN_SET);
-
-}else{
-
-
-	HAL_GPIO_WritePin(LD3_GPIO_Port,LD3_Pin,GPIO_PIN_RESET);
-
-}
-
 
 }
 

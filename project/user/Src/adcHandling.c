@@ -128,7 +128,6 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 		
 
 	readAdc3();	
-	HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);		
 	c2++;		
 	
 	}
@@ -143,7 +142,7 @@ void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc){
   /* program.                                                                 */
   if(hadc->Instance==ADC2){
 	
-	HAL_GPIO_TogglePin(LD3_GPIO_Port,LD3_Pin);
+
 	
 	
 	}
@@ -152,7 +151,7 @@ void initAdc(void){
 	
 	//****scalings start
 	
-	scale.ch.Van=1;
+	scale.ch.Van=1; //cau --neg sign
 	scale.ch.Vbn=1;
 	scale.ch.Vcn=1;
 	scale.ch.Vdc=1;
