@@ -107,9 +107,9 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	
 	
 	readAdc12();
-	HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin,GPIO_PIN_SET);
+	
 	mainFlow();
-	HAL_GPIO_WritePin(LD1_GPIO_Port,LD1_Pin,GPIO_PIN_RESET);
+	
 	
 	
 	c1++;	
@@ -139,11 +139,10 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 
 void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc){
   /* Set variable to report analog watchdog out of window status to main      */
-  /* program.                                                                 */
-  if(hadc->Instance==ADC2){
-	
+  /* program.
+	*/
 
-	
+  if(hadc->Instance==ADC2){
 	
 	}
 }
@@ -191,6 +190,8 @@ void initAdc(void){
 	
 	
 	
+	#if 1
+	
 	/* Start TIM2*/
 	HAL_TIM_Base_Start_IT(&htim2);
   /* Start ADCx and ADCy multimode conversion on regular group with transfer by DMA */
@@ -202,8 +203,11 @@ void initAdc(void){
     Error_Handler();
   }
 	
+	#endif
 
 	HAL_TIM_Base_Start_IT(&htim4);
+	
+
 	
 	#if 1
 	
@@ -218,6 +222,8 @@ void initAdc(void){
   }
 	
 	#endif
+	
+	
 
 }
 

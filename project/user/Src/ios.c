@@ -68,6 +68,9 @@ HAL_GPIO_WritePin(HB_RST_GPIO_Port,HB_RST_Pin,(GPIO_PinState)DO.bit.rst);
 HAL_GPIO_WritePin(MCB_in_GPIO_Port,MCB_in_Pin,(GPIO_PinState)DO.bit.mcb_in);
 
 
+DI.bit.hb1_fault=inputDelay[0].output;
+
+
 };
 
 

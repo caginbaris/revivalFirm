@@ -1,23 +1,36 @@
-#include "stdint.h"
+#include <stdint.h>
 #include "pwmGeneration.h"
 #include "plib.h"
+#include "LEDs.h"
 
 uint8_t switchingEnable=0;
 
-transition_parameters swTransition={0,0};
-delay_parameters swEnable={0,10,0};
+transition_parameters swHTransition={0,0};
+transition_parameters swLTransition={0,0};
+
+delay_parameters swEnable={0,1000,0};
 
 void switchingTest(void){
 	
-	low2highTransition(switchingEnable,&swTransition);
-	off_delay(swTransition.output,&swEnable);
+	low2highTransition(switchingEnable,&swHTransition);
+	off_delay(swHTransition.output,&swEnable);
+	high2lowTransition(switchingEnable,&swLTransition);
 	
-	if(swTransition.output){modulatorEnable();}
-	if(!swEnable.output){modulatorDisable();}
+	if(swHTransition.output){
 	
-	sw_count_a=wscale*0.25;
-	sw_count_b=wscale*0.25;
-	sw_count_c=wscale*0.25;
+	modulatorEnable();
+
+	}
+	
+	if(swLTransition.output){
+	
+	modulatorDisable();
+	
+	}
+	
+	sw_count_a=1000;
+	sw_count_b=1000;
+	sw_count_c=1000;
 	
 	modulator();
 

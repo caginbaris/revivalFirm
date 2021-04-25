@@ -26,7 +26,7 @@ void frequency(double input,double *output,double samplingFrequency){
 		low2highTransition(p.output, &t);
 		
 	
-		if(t.output || pulseCount>2000){
+		if(t.output || pulseCount>20000){
 
 			if(pulseCount!=0){
 				

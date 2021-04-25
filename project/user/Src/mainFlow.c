@@ -7,6 +7,7 @@
 #include "testBenches.h"
 #include "measurement.h"
 #include "LEDs.h"
+#include "ios.h"
 
 #define samplinfFrequency 50000
 
@@ -29,14 +30,15 @@ void mainFlow(void){
 		
 
 		
-		frequencyMeasurement();
-		rmsMeasurement();
+		//frequencyMeasurement();
+		//rmsMeasurement();
+		//ios();
 		switchingTest();
 
 		
 		fToggle(1,&mainFlowSecondCounter); 
 		
-		LEDs();
+		
 		cycleCount=htim2.Instance->CNT-cycleCount;
 		cpuLoading=100.0*(double)(cycleCount)/(double)(htim2.Init.Period);
 		

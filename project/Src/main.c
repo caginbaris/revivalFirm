@@ -127,9 +127,11 @@ int main(void)
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
 	
+	
+	HAL_TIM_Base_Start_IT(&htim1);
 	initAdc();
-	modulatorEnable();
-
+	
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
