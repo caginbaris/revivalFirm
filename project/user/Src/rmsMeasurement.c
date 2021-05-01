@@ -1,7 +1,7 @@
 #include "adcHandling.h"
 #include "mlib.h"
 
-#define halfPeriod 500
+
 
 trueRMS_sampled_parameters tRMS[6]={
 	
@@ -21,7 +21,7 @@ void rmsMeasurement(void){
 	
 		static uint16_t periodCounter=0;
 	
-		if(++periodCounter==halfPeriod){periodCounter=0;}
+		if(++periodCounter==1000){periodCounter=0;}
 		
 		
 		trueRMS_sampled(adc.ch.Ia,&tRMS[0],periodCounter);

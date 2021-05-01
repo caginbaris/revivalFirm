@@ -31,8 +31,8 @@ void mainFlow(void){
 
 		
 		//frequencyMeasurement();
-		//rmsMeasurement();
-		//ios();
+		rmsMeasurement();
+		ios();
 		switchingTest();
 
 		
