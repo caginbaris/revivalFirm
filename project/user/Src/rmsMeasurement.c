@@ -3,7 +3,7 @@
 
 
 
-trueRMS_sampled_parameters tRMS[6]={
+trueRMS_sampled_parameters tRMS[10]={
 	
 {0,0,0},
 {0,0,1},
@@ -11,8 +11,10 @@ trueRMS_sampled_parameters tRMS[6]={
 {0,0,3},
 {0,0,4},
 {0,0,5},
-
-
+{0,0,6},
+{0,0,7},
+{0,0,8},
+{0,0,9}
 };
 
 
@@ -32,6 +34,11 @@ void rmsMeasurement(void){
 		trueRMS_sampled(adc.ch.Vbn,&tRMS[4],periodCounter);
 		trueRMS_sampled(adc.ch.Vcn,&tRMS[5],periodCounter);
 		
-
+		trueRMS_sampled(adc.ch.Van-adc.ch.Vbn,&tRMS[6],periodCounter);
+		trueRMS_sampled(adc.ch.Vbn-adc.ch.Vcn,&tRMS[7],periodCounter);
+		trueRMS_sampled(adc.ch.Vcn-adc.ch.Van,&tRMS[8],periodCounter);
+		
+		trueRMS_sampled(adc.ch.Vdc,&tRMS[9],periodCounter);
+		
 
 }

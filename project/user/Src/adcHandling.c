@@ -2,6 +2,7 @@
 #include "main.h"
 #include "adc.h"
 #include "tim.h"
+#include "opamp.h"
 
 
 uint64_t c1=0,c2=0;
@@ -39,7 +40,9 @@ ALIGN_32BYTES(static uint32_t   aADC3ConvertedData[ADC3CONVERTEDVALUES_BUFFER_SI
 
 adcChannel_Type ch=ch_Van;
 volatile adcData_Type adc={0};
+
 adcData_Type scale={0};
+adcData_Type offset={0};
 
 
 void readAdc12(void);
@@ -148,23 +151,38 @@ void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc){
 }
 void initAdc(void){
 	
-	//****scalings start
+	//****scalings--offset start
 	
-	scale.ch.Van=1; //cau --neg sign
-	scale.ch.Vbn=1;
-	scale.ch.Vcn=1;
-	scale.ch.Vdc=1;
+	scale.ch.Van=-0.022456; 
+	scale.ch.Vbn=-0.022456;
+	scale.ch.Vcn=-0.022456;
+	scale.ch.Vdc=0.0101201771031;
 	
-	scale.ch.Ia=0.00621664*0.991; //cau not 3.3v , 3.27v act
-	scale.ch.Ib=0.00621664;;
-	scale.ch.Ic=0.00621664;;
+	scale.ch.Ia=-0.00606; //cau neg sign,  not 3.3v , 3.27v act
+	scale.ch.Ib=0.005959;
+	scale.ch.Ic=0.006049;
 	
 	scale.ch.NTCa=1.65/32767.0;
-	scale.ch.NTCb=1;
-	scale.ch.NTCc=1;
-	scale.ch.v5=1;
+	scale.ch.NTCb=1.65/32767.0;
+	scale.ch.NTCc=1.65/32767.0;
+	scale.ch.v5=0.0001;
 	
-	//****scalings end
+	
+	offset.ch.Van=32943; 
+	offset.ch.Vbn=32817;
+	offset.ch.Vcn=32820;
+	offset.ch.Vdc=10;
+	
+	offset.ch.Ia=32781; 
+	offset.ch.Ib=32718;
+	offset.ch.Ic=32747;
+	
+	offset.ch.NTCa=0;
+	offset.ch.NTCb=0;
+	offset.ch.NTCc=0;
+	offset.ch.v5=0;
+	
+	//****scalings offset end
 
 	
 
@@ -186,6 +204,12 @@ void initAdc(void){
     /* Calibration Error */
     Error_Handler();
   }
+	
+	
+	if(HAL_OPAMP_Start(&hopamp2)!=HAL_OK)
+  {
+    Error_Handler();
+  }  
 	
 	
 	
@@ -232,14 +256,14 @@ void initAdc(void){
 void readAdc12(void){
 
 
-	adc.ch.Van=scale.ch.Van*((double)aADCxConvertedValues[seq_Van]);
-	adc.ch.Vbn=scale.ch.Vbn*((double)aADCxConvertedValues[seq_Vbn]);
-	adc.ch.Vcn=scale.ch.Vcn*((double)aADCxConvertedValues[seq_Vcn]);
-	adc.ch.Vdc=scale.ch.Vdc*((double)aADCxConvertedValues[seq_Vdc]);
+	adc.ch.Van=scale.ch.Van*((double)aADCxConvertedValues[seq_Van]-offset.ch.Van);
+	adc.ch.Vbn=scale.ch.Vbn*((double)aADCxConvertedValues[seq_Vbn]-offset.ch.Vbn);
+	adc.ch.Vcn=scale.ch.Vcn*((double)aADCxConvertedValues[seq_Vcn]-offset.ch.Vcn);
+	adc.ch.Vdc=scale.ch.Vdc*((double)aADCxConvertedValues[seq_Vdc]-offset.ch.Vdc);
 	
-	adc.ch.Ia=scale.ch.Ia*((double)aADCyConvertedValues[seq_Ia]-32768);
-	adc.ch.Ib=scale.ch.Ib*((double)aADCyConvertedValues[seq_Ib]);
-	adc.ch.Ic=scale.ch.Ic*((double)aADCyConvertedValues[seq_Ic]);
+	adc.ch.Ia=scale.ch.Ia*((double)aADCyConvertedValues[seq_Ia]-offset.ch.Ia);
+	adc.ch.Ib=scale.ch.Ib*((double)aADCyConvertedValues[seq_Ib]-offset.ch.Ib);
+	adc.ch.Ic=scale.ch.Ic*((double)aADCyConvertedValues[seq_Ic]-offset.ch.Ic);
 	
 	
 }

@@ -128,7 +128,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	
 	
-	HAL_TIM_Base_Start_IT(&htim1);
+	//HAL_TIM_Base_Start_IT(&htim1);
 	initAdc();
 	
 	
