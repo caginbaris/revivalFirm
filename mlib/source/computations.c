@@ -91,3 +91,18 @@ double thermal_status(double rms, thermal_parameters therm, double mem){
 
 
 
+double max3p(double p1, double p2, double p3){
+
+	double max=p1;
+	
+	if(p2>max){max=p2;}
+	if(p3>max){max=p3;}
+
+
+return max;
+	
+}
+
+
+
+

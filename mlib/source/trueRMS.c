@@ -4,7 +4,7 @@
 #define samplingFrequency 50000.0
 #define frequency 50.0
 #define period (1.0/frequency)
-#define N (samplingFrequency/frequency)
+#define N (10*samplingFrequency/frequency)
 #define invN 1.0/(N)
 
 

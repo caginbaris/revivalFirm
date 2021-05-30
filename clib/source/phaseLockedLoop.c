@@ -4,7 +4,6 @@
 #define   pi 3.1415926535897932384626433832795
 #define _2pi 6.283185307179586476925286766559
 #define wt (_2pi*50.0)
-
 #define p_Kp 200.0
 #define p_Ki 20000
 #define p_fs 50000.0
@@ -54,7 +53,7 @@ void PLL(double alpha,pll_parameters* pll){
     if(pll->theta_comp>=_2pi){pll->theta_comp=pll->theta_comp-_2pi;}
     if(pll->theta_comp<=0){pll->theta_comp=pll->theta_comp+_2pi;}
 
-
+	
 }
 
 

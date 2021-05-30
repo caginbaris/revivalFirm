@@ -45,7 +45,7 @@ double rateLimiter(double x,double xz, double maxRate, double ts){
 }
 
 
-void piControllerImplementaiton(piData* pi){
+void piControllerImplementation(piData* pi){
 	
 
 	

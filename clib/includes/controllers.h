@@ -112,7 +112,7 @@ typedef struct piData{
 
 
 void piControllerInitialization(piData* pi,piInit init);
-void piControllerImplementaiton(piData* pi);
+void piControllerImplementation(piData* pi);
 
 
 

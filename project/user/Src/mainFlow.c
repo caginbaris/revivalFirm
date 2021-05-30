@@ -17,7 +17,7 @@ double cpuLoading;
 
 delay_parameters mainFlowSecondCounter={0,samplinfFrequency,0};
 
-
+void controlRoutines(void);
 
 void mainFlow(void){
 	
@@ -33,7 +33,9 @@ void mainFlow(void){
 		//frequencyMeasurement();
 		rmsMeasurement();
 		ios();
-		switchingTest();
+	
+		controlRoutines();
+		pllTest();
 
 		
 		fToggle(1,&mainFlowSecondCounter); 
