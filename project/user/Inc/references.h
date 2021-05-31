@@ -7,7 +7,8 @@ typedef struct reference{
 double Q;
 double I;	
 	
-double Vdc; 
+double Vdc;
+double Vdc_initial; 	
 double Vdc_final; 
 	
 double dTermD;	

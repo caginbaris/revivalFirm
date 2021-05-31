@@ -31,6 +31,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "initialization.h"
 #include "adcHandling.h"
 #include "pwmGeneration.h"
 #include "LEDs.h"
@@ -129,7 +130,7 @@ int main(void)
 	
 	
 	//HAL_TIM_Base_Start_IT(&htim1);
-	initAdc();
+	initialization();
 	
 	
   /* USER CODE END 2 */

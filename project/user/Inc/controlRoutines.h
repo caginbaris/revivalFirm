@@ -3,7 +3,7 @@
 
 #include "clib.h"
 
-#define clib_samplingPeriod 0.00004
+
 
 extern pll_parameters pll;
 extern phase V,I;

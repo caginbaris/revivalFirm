@@ -38,7 +38,8 @@ void mainFlow(void){
 		pllTest();
 
 		
-		fToggle(1,&mainFlowSecondCounter); 
+		fToggle(1,&mainFlowSecondCounter);
+		LED.out._1=mainFlowSecondCounter.output;
 		
 		
 		cycleCount=htim2.Instance->CNT-cycleCount;

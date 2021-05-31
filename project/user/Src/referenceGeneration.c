@@ -13,7 +13,7 @@
 
 reference ref={0};
 
-static double refz=0,Vdf=1.0,Vdz=0;
+static double ref_iz=0,ref_fz=0,Vdf=1.0,Vdz=0;
 
 static double fofCoefficents1e0[2]={
 
@@ -25,8 +25,9 @@ static double fofCoefficents1e0[2]={
 void init_references(void){
 
 
-ref.Vdc=700;
-ref.Vdc_final=850;
+ref.Vdc=560;
+ref.Vdc_initial=560;
+ref.Vdc_final=560;	
 	
 ref.Q=0;
 ref.I=0;		
@@ -39,13 +40,13 @@ ref.dTermQ=0;
 
 void references(void){
 	
-	rmsChannel_Type rms_channel=rms_Van;
 	
 	FOF(pV.d,Vdz,Vdf,fofCoefficents1e2);
 	
 	ref.I = (Vdf > 10.0) ? ref.Q/Vdf : ref.I;
 	
-	FOF((tRMS[rms_channel].out+requiredVoltage)*sqrt3*idc2ac,refz,ref.Vdc,fofCoefficents1e0);
+	FOF((tRMS[rms_Vab].out),ref_iz,ref.Vdc_initial,fofCoefficents1e0);
+	FOF((tRMS[rms_Van].out+requiredVoltage)*sqrt3*idc2ac,ref_fz,ref.Vdc_final,fofCoefficents1e0);
 	
 	//cau decoupling terms should be added
 								
