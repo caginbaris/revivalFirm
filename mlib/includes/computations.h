@@ -58,7 +58,7 @@ void sym_comp(phase_cs_in pa, phase_cs_in pb,phase_cs_in pc,sym_out*sym);
 void sym_mag(sym_out sym, sym_out *sym_back, sym_out *sym_rms  );
 double thermal_status(double rms,thermal_parameters therm, double mem);
 double max3p(double p1, double p2, double p3);
-
+double min3p(double p1, double p2, double p3);
 //macros
 
 #define THERMAL_STATUS(rms,thermalData,out) out=thermal_status(rms,thermalData,out);

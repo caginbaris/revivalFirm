@@ -4,10 +4,7 @@
 #include "main.h"
 
 
-double fSignal=0,fundamentalFrequency=0;
-
-static double coeffs[5]={0.001881411443387,0,-0.001881411443387,-1.996193044584017,0.996237177113225};
-static sos_parameters bp={0};
+double fundamentalFrequency=0;
 static delay_parameters p={0,100,0};
 static transition_parameters t={0,0};
 
@@ -17,7 +14,7 @@ static uint32_t pulseCount=0;
 
 //cau only for single invocation
 
-void frequency(double input,double *output,double samplingFrequency){
+void frequencyDetect(double input,double *output,double samplingFrequency){
 
 
 
@@ -46,9 +43,7 @@ void frequency(double input,double *output,double samplingFrequency){
 
 void frequencyMeasurement(void){
 
-
-fSignal=sos_implementation(adc.ch.Ia ,fSignal,coeffs, &bp);
-frequency(fSignal,&fundamentalFrequency,50000.0);
+frequencyDetect(adc.ch.Van,&fundamentalFrequency,50000.0);
 	
 
 }

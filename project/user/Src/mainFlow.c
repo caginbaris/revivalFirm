@@ -6,8 +6,10 @@
 #include "pwmGeneration.h"
 #include "testBenches.h"
 #include "measurement.h"
+#include "protection.h"
 #include "LEDs.h"
 #include "ios.h"
+#include "states.h"
 
 #define samplinfFrequency 50000
 
@@ -28,15 +30,15 @@ void mainFlow(void){
 		cycleCount=htim2.Instance->CNT;
 		
 		
-
-		
-		//frequencyMeasurement();
-		rmsMeasurement();
+		state_chart();
+	
+		measurement();
+		protection();
+	
 		ios();
 	
 		controlRoutines();
-		pllTest();
-
+	
 		
 		fToggle(1,&mainFlowSecondCounter);
 		LED.out._1=mainFlowSecondCounter.output;

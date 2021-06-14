@@ -27,4 +27,13 @@ extern underLimit_outputParameters underVoltageDC, underVoltageAC;
 extern overLimit_inputParameters overTemp_Config;
 extern overLimit_outputParameters overTempA,overTempB,overTempC;
 
+
+
+
+void overCurrent(void);
+void voltageProtections(void);
+void ntcProtections(void);
+
+void protection(void);
+
 #endif

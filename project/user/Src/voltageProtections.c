@@ -2,6 +2,7 @@
 #include "adcHandling.h"
 #include "ios.h"
 #include "measurement.h"
+#include "states.h"
 
 #define samplingFrequency 50000
 
@@ -16,7 +17,7 @@ underLimit_outputParameters underVoltageDC, underVoltageAC;
 void voltageProtectionsInit(void){
 
 
-overVoltageDC_Config.level=24;
+overVoltageDC_Config.level=100;
 overVoltageDC_Config.delay=0.01;
 overVoltageDC_Config.dropout_ratio=0.99;
 overVoltageDC_Config.dropout_time=0.01;
@@ -27,7 +28,7 @@ overVoltageDC_Config.fs=samplingFrequency;
 overLimitInitialization(overVoltageDC_Config,&overVoltageDC);
 
 	
-overVoltageAC_Config.level=24;
+overVoltageAC_Config.level=70;
 overVoltageAC_Config.delay=0.01;
 overVoltageAC_Config.dropout_ratio=0.99;
 overVoltageAC_Config.dropout_time=0.01;
@@ -38,7 +39,7 @@ overVoltageAC_Config.fs=samplingFrequency;
 overLimitInitialization(overVoltageAC_Config,&overVoltageAC);	
 
 
-underVoltageDC_Config.level=0.1;
+underVoltageDC_Config.level=10;
 underVoltageDC_Config.delay=0.04;
 underVoltageDC_Config.dropout_ratio=0.99;
 underVoltageDC_Config.dropout_time=0.01;
@@ -49,7 +50,7 @@ underVoltageDC_Config.fs=samplingFrequency;
 underLimitInitialization(underVoltageDC_Config,&underVoltageDC);
 
 	
-underVoltageAC_Config.level=0.1;
+underVoltageAC_Config.level=7;
 underVoltageAC_Config.delay=0.04;
 underVoltageAC_Config.dropout_ratio=0.99;
 underVoltageAC_Config.dropout_time=0.01;
@@ -65,14 +66,19 @@ underLimitInitialization(underVoltageAC_Config,&underVoltageAC);
 
 
 void voltageProtections(void){
+	
+	uint8_t inhibitUV_DC;
+	
+	underVoltageDC_Config.level=tRMS[rms_Van].out*1.414*0.8; //cau config and real parameters 
+	inhibitUV_DC=(currentState==charged ||currentState==idle || currentState==run )?(0):(1);
 
 	
 	overLimit(adc.ch.Vdc,overVoltageDC_Config,&overVoltageDC,0,DO.bit.rst);
-	overLimit(max3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),overVoltageDC_Config,&overVoltageDC,0,DO.bit.rst);
+	overLimit(max3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),overVoltageAC_Config,&overVoltageAC,0,DO.bit.rst);
 	
 	
-	underLimit(adc.ch.Vdc,underVoltageDC_Config,&underVoltageDC,0,DO.bit.rst); //cau inhibit condition should be added
-	underLimit(max3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),underVoltageAC_Config,&underVoltageAC,0,DO.bit.rst); //cau inhibit condition should be added
+	underLimit(adc.ch.Vdc,underVoltageDC_Config,&underVoltageDC,inhibitUV_DC,DO.bit.rst); //cau inhibit condition should be added
+	underLimit(min3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),underVoltageAC_Config,&underVoltageAC,0,DO.bit.rst); //cau inhibit condition should be added
 
 
 }

@@ -1,7 +1,7 @@
 #include "adcHandling.h"
 #include "measurement.h"
 #include "clib.h"
-#include "references.h"
+
 
 #define fs 50000.0
 #define pi_ts (1.0/50000.0)
@@ -105,7 +105,7 @@ piControllerInitialization(&pidcf,pidcInit);
 
 void controlRoutines(void){
 	
-	rmsChannel_Type rms_channel=rms_Van;
+
 
 	V.a=adc.ch.Van;
 	V.c=adc.ch.Vcn;
@@ -115,9 +115,9 @@ void controlRoutines(void){
 	I.b=adc.ch.Ib;
 	I.c=adc.ch.Ic;
 	
-	if(tRMS[rms_channel].out>1.0){PLL(1.4142*V.a/tRMS[rms_channel].out,&pll);}
+	if(tRMS[3].out>1.0){PLL(1.4142*V.a/tRMS[3].out,&pll);}
 	
-	
+	/*
 	clarkeParkTransform(V,&cV,&pV,pll.theta_comp);
 	clarkeParkTransform(I,&cI,&pI,pll.theta_comp);
 	
@@ -153,7 +153,7 @@ void controlRoutines(void){
 	//inverseClarkeParkTransform(pV,&icV,&cOut,theta);
 	
 	
-	
+	*/
 
 
 

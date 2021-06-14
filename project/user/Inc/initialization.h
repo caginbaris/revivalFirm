@@ -5,6 +5,10 @@ void initAdc(void);
 void initDac(void);
 void initComp(void);
 
+void overCurrentInit(void);
+void voltageProtectionsInit(void);
+void ntcProtectionsInit(void);
+
 void initialization(void);
 
 #endif

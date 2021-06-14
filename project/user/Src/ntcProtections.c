@@ -12,8 +12,8 @@ overLimit_outputParameters overTempA,overTempB,overTempC;
 void ntcProtectionsInit(void){
 
 
-overTemp_Config.level=24;
-overTemp_Config.delay=0.01;
+overTemp_Config.level=80;
+overTemp_Config.delay=1;
 overTemp_Config.dropout_ratio=0.99;
 overTemp_Config.dropout_time=0.01;
 overTemp_Config.comm_pick_on_delay=0.01;	
@@ -30,9 +30,9 @@ overLimitInitialization(overTemp_Config,&overTempC);
 void ntcProtections(void){
 
 	
-	overLimit(adc.ch.NTCa,overTemp_Config,&overTempA,0,DO.bit.rst);
-	overLimit(adc.ch.NTCb,overTemp_Config,&overTempB,0,DO.bit.rst);
-	overLimit(adc.ch.NTCc,overTemp_Config,&overTempC,0,DO.bit.rst);
+	overLimit(ntcVar.T1,overTemp_Config,&overTempA,0,DO.bit.rst);
+	overLimit(ntcVar.T2,overTemp_Config,&overTempB,0,DO.bit.rst);
+	overLimit(ntcVar.T3,overTemp_Config,&overTempC,0,DO.bit.rst);
 
 
 

@@ -104,5 +104,18 @@ return max;
 }
 
 
+double min3p(double p1, double p2, double p3){
+
+	double min=p1;
+	
+	if(p2<min){min=p2;}
+	if(p3<min){min=p3;}
+
+
+return min;
+	
+}
+
+
 
 
