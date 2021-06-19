@@ -3,6 +3,7 @@
 #include "adc.h"
 #include "tim.h"
 #include "opamp.h"
+#include "faultHandling.h"
 
 
 uint64_t c1=0,c2=0;
@@ -141,21 +142,25 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 
 
 void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc){
-  /* Set variable to report analog watchdog out of window status to main      */
-  /* program.
-	*/
 
   if(hadc->Instance==ADC2){
+		
+		faultWord.bit.analogWatchDogFired=1;
 	
 	}
 }
+
+
+
+
+
 void initAdc(void){
 	
 	//****scalings--offset start
 	
-	scale.ch.Van=-0.022456; 
-	scale.ch.Vbn=-0.022456;
-	scale.ch.Vcn=-0.022456;
+	scale.ch.Van=-0.022456*0.5; 
+	scale.ch.Vbn=-0.022456*0.5;
+	scale.ch.Vcn=-0.022456*0.5;
 	scale.ch.Vdc=0.0101201771031;
 	
 	scale.ch.Ia=-0.00606; //cau neg sign,  not 3.3v , 3.27v act

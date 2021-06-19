@@ -18,7 +18,7 @@ LED.out._3=0;
 low2highTransition(command.bit.start,&startTrigger);
 	
 
-if(startTrigger.output){currentState=idle;}
+if(startTrigger.output){currentState=charged;}
 if(faultWord.all){currentState=fault;}
 
 if(currentState!=ready){

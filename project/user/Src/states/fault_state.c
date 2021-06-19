@@ -12,6 +12,7 @@ LED.out._2=0;
 LED.out._3=0;	
 
 if(DO.bit.rst){
+	
 
 if(faultWord.all==0){currentState=ready;}
 

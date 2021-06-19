@@ -3,6 +3,7 @@
 #include "adcHandling.h"
 #include "measurement.h"
 #include "ios.h"
+#include "faultHandling.h"
 
 #define samplingFrequency 50000
 
@@ -20,7 +21,7 @@ overLimit_outputParameters overCurrentPeak_L1,overCurrentPeak_L2,overCurrentPeak
 void overCurrentInit(void){
 
 
-overCurrentRMS_Config.level=2;
+overCurrentRMS_Config.level=0.9;
 overCurrentRMS_Config.delay=0.04;
 overCurrentRMS_Config.dropout_ratio=0.99;
 overCurrentRMS_Config.dropout_time=0.01;
@@ -46,11 +47,11 @@ overLimitInitialization(overCurrentCS_Config,&overCurrentCS_L2);
 overLimitInitialization(overCurrentCS_Config,&overCurrentCS_L3);		
 
 
-overCurrentPeak_Config.level=1.5;
+overCurrentPeak_Config.level=1.4;
 overCurrentPeak_Config.delay=0.001;
 overCurrentPeak_Config.dropout_ratio=0.99;
 overCurrentPeak_Config.dropout_time=0.0005;
-overCurrentPeak_Config.comm_pick_on_delay=0.0025;	
+overCurrentPeak_Config.comm_pick_on_delay=0.001;	
 overCurrentPeak_Config.comm_pick_off_delay=10;
 overCurrentPeak_Config.fs=samplingFrequency;
 
@@ -59,8 +60,16 @@ overLimitInitialization(overCurrentPeak_Config,&overCurrentPeak_L2);
 overLimitInitialization(overCurrentPeak_Config,&overCurrentPeak_L3);		
 	
 
-}
+if(	overCurrentRMS_L1.initialized==0 ||overCurrentCS_L1.initialized==0 ||overCurrentPeak_L1.initialized==0 ||
+		overCurrentRMS_L2.initialized==0 ||overCurrentCS_L2.initialized==0 ||overCurrentPeak_L2.initialized==0 ||
+		overCurrentRMS_L3.initialized==0 ||overCurrentCS_L3.initialized==0 ||overCurrentPeak_L3.initialized==0 ){
+	
 
+	faultWord.bit.overCurrentProtectionInit=1;
+
+	}
+		
+}
 
 void overCurrent(void){
 	

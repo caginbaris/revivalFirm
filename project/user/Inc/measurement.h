@@ -2,7 +2,7 @@
 #define __measurement_H__
 
 #include "mlib.h"
-#include "clib.h"
+
 
 
 void frequencyMeasurement(void);
@@ -34,7 +34,6 @@ typedef enum rmsChannel {   rms_Ia=0,
 
 extern rmsChannel_Type rmsSeq;
 extern trueRMS_sampled_parameters tRMS[17];
-extern pll_parameters pll;
 extern phase_cs_out cs_Aout,cs_Bout,cs_Cout;
 extern sym_out sym;
 extern double dcRipple, dcAverage,Vdcf;

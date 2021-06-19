@@ -6,7 +6,7 @@
 #include "LEDs.h"
 
 static delay_parameters chargedToggle={0,samplingRate*1,0};
-static delay_parameters waiting4dcLevel={0,samplingRate*12,0};
+static delay_parameters waiting4dcLevel={0,samplingRate*60,0};
 
 stateID charged_state(void){
 
@@ -34,9 +34,7 @@ currentState=idle;
 }	
 	
 
-
-
-
+if(faultWord.all){currentState=fault;}
 if(currentState!=charged){
 	
 

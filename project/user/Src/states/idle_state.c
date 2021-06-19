@@ -26,7 +26,7 @@ currentState=fault;
 
 }else{
 
-currentState=idle;
+currentState=run;
 
 }
 
@@ -35,7 +35,7 @@ currentState=idle;
 
 
 
-
+if(faultWord.all){currentState=fault;}
 if(currentState!=idle){
 	
 

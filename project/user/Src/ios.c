@@ -74,9 +74,9 @@ DI.bit.hb1_fault=inputDelay[0].output;
 DI.bit.hb2_fault=inputDelay[1].output;
 DI.bit.hb3_fault=inputDelay[2].output;
 
-HAL_GPIO_WritePin(HB_RST_GPIO_Port,HB_RST_Pin,(GPIO_PinState)DO.bit.rst);
+HAL_GPIO_WritePin(HB_RST_GPIO_Port,HB_RST_Pin,(GPIO_PinState)!DO.bit.rst);
 
-if(DO.bit.rst==0){DO.bit.rst=1;}
+
 
 };
 

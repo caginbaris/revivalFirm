@@ -23,9 +23,9 @@ void faultHandling(void){
 	faultWord.bit.pwrgd_v5 = 	(adc.ch.v5<4.85) ? 1 : 0;
 	faultWord.bit.pwrgd_24v = (DI.bit.pwrgd_24v) ;
 	
-	faultWord.bit.hb1_fault= DI.bit.hb1_fault;	
-	faultWord.bit.hb2_fault= DI.bit.hb2_fault;	
-	faultWord.bit.hb3_fault= DI.bit.hb3_fault;	
+	faultWord.bit.hb1_fault= !DI.bit.hb1_fault;	
+	faultWord.bit.hb2_fault= !DI.bit.hb2_fault;	
+	faultWord.bit.hb3_fault= !DI.bit.hb3_fault;	
 	
 		
 	// handled in cmp uint32_t comp_vdc:1;
@@ -60,12 +60,35 @@ void faultHandling(void){
 
 		
 		/*
-		handled in states
+		
+		
+		
+		// handled in states
 		
 		uint32_t charged_state_error:1;
 		uint32_t idle_state_error:1;
-		uint32_t run_state_error:1;*/
+		uint32_t run_state_error:1;
 		
+		
+		
+		// handled in init routines 
+		
+		uint64_t overCurrentProtectionInit:1;
+		uint64_t voltageProtectionInit:1;
+		uint64_t ntcProtectionInit:1;
+		
+		
+		
+		//handled in pll routine
+		uint64_t synchronization:1;
+		
+		//handled in adc
+		uint64_t analogWatchDogFired:1;
+		
+		//handled in measurement
+		uint64_t inputFrequency:1;
+
+		*/
 		
 		
 

@@ -58,7 +58,8 @@ if(checked.output){
   	
 	
 	dcRamp=1;
-	
+
+	// dc initial and final degerler burada atanabilir
 
 }
 	
@@ -72,7 +73,7 @@ if(ref.Vdc>ref.Vdc_final){ref.Vdc=ref.Vdc_final,dcRamp=0;}
 }
 
 
-modulator(); // should be added to main flow
+
 
 
 if(command.bit.stop){currentState=stopped;}

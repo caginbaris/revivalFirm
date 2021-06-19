@@ -1,13 +1,16 @@
 #include "adcHandling.h"
 #include "measurement.h"
 #include "clib.h"
+#include "plib.h"
+#include "faultHandling.h"
+#include "pllHandling.h"
 
 
 #define fs 50000.0
 #define pi_ts (1.0/50000.0)
 
 
-pll_parameters pll={0};
+
 phase V,I;
 park  pV,pI;
 clarke cV,cI;
@@ -19,6 +22,8 @@ piData pidf={0},piqf={0},pidcf={0};
 clarke icV;
 park   ipV,ipVz;
 phase  cOut,final;
+
+
 
 
 void initControlRoutines(void){
@@ -115,7 +120,7 @@ void controlRoutines(void){
 	I.b=adc.ch.Ib;
 	I.c=adc.ch.Ic;
 	
-	if(tRMS[3].out>1.0){PLL(1.4142*V.a/tRMS[3].out,&pll);}
+	
 	
 	/*
 	clarkeParkTransform(V,&cV,&pV,pll.theta_comp);

@@ -10,10 +10,12 @@
 #include "LEDs.h"
 #include "ios.h"
 #include "states.h"
+#include "faultHandling.h"
+#include "pllHandling.h"
 
 #define samplinfFrequency 50000
 
-uint32_t cycleCount;
+int32_t cycleCount;
 double cpuLoading;
 
 
@@ -30,15 +32,19 @@ void mainFlow(void){
 		cycleCount=htim2.Instance->CNT;
 		
 		
-		state_chart();
+		//state_chart();
 	
 		measurement();
+		pllHandling();
 		protection();
 	
-		ios();
+		faultHandling();
 	
+		
+
 		controlRoutines();
-	
+		
+		ios();
 		
 		fToggle(1,&mainFlowSecondCounter);
 		LED.out._1=mainFlowSecondCounter.output;

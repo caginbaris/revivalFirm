@@ -45,11 +45,11 @@ void references(void){
 	
 	ref.I = (Vdf > 10.0) ? ref.Q/Vdf : ref.I;
 	
-	FOF((tRMS[rms_Vab].out),ref_iz,ref.Vdc_initial,fofCoefficents1e0);
+	FOF((tRMS[rms_Vab].out*1.414),ref_iz,ref.Vdc_initial,fofCoefficents1e0);
 	FOF((tRMS[rms_Van].out+requiredVoltage)*sqrt3*idc2ac,ref_fz,ref.Vdc_final,fofCoefficents1e0);
 	
 	//cau decoupling terms should be added
 								
-
+	
 
 }

@@ -3,6 +3,7 @@
 #include "ios.h"
 #include "LEDs.h"
 #include "faultHandling.h"
+#include "ios.h"
 
 
 static delay_parameters startupPassTime={0,samplingRate*10,0};
@@ -23,6 +24,8 @@ LED.out._3=!startupToggle.output;
 on_delay(1,&startupPassTime);
 	
 if(startupPassTime.output){
+	
+DO.bit.rst=1;
 	
 startupPassTime.count=0;
 

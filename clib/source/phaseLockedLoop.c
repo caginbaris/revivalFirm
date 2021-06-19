@@ -4,12 +4,11 @@
 #define   pi 3.1415926535897932384626433832795
 #define _2pi 6.283185307179586476925286766559
 #define wt (_2pi*50.0)
-
-#define p_Kp 200.0
-#define p_Ki 20000
+#define p_Kp 200 //12.5
+#define p_Ki 20000.0 //100
 #define p_fs 50000.0
 #define p_ts 1.0/(p_fs)
-#define p_comp  _2pi/(p_fs*0.02)
+#define p_comp  1.0*_2pi/(p_fs*0.02)
 #define p_fc_num 0.006244035046343
 #define p_fc_den -0.987511929907314
 
@@ -33,7 +32,7 @@ void PLL(double alpha,pll_parameters* pll){
     pll->Iout+=-pll->df*p_Ki*p_ts;
 
     if(pll->Iout>wt){pll->Iout = wt;}
-    if(pll->Iout<0){pll->Iout = 0;}
+    if(pll->Iout<-wt){pll->Iout = -wt;}
 
     pll->PIout=pll->Pout+pll->Iout+wt;
     pll->theta+=p_ts*pll->PIout;
@@ -54,8 +53,6 @@ void PLL(double alpha,pll_parameters* pll){
     pll->theta_comp=pll->theta-1.5*pi;
     if(pll->theta_comp>=_2pi){pll->theta_comp=pll->theta_comp-_2pi;}
     if(pll->theta_comp<=0){pll->theta_comp=pll->theta_comp+_2pi;}
+		
 
-
-}
-
-
+	}

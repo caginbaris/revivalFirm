@@ -2,6 +2,7 @@
 #include "adcHandling.h"
 #include "ios.h"
 #include "measurement.h"
+#include "faultHandling.h"
 
 #define samplingFrequency 50000
 
@@ -12,8 +13,8 @@ overLimit_outputParameters overTempA,overTempB,overTempC;
 void ntcProtectionsInit(void){
 
 
-overTemp_Config.level=80;
-overTemp_Config.delay=1;
+overTemp_Config.level=28;
+overTemp_Config.delay=10;
 overTemp_Config.dropout_ratio=0.99;
 overTemp_Config.dropout_time=0.01;
 overTemp_Config.comm_pick_on_delay=0.01;	
@@ -23,8 +24,25 @@ overTemp_Config.fs=samplingFrequency;
 overLimitInitialization(overTemp_Config,&overTempA);
 overLimitInitialization(overTemp_Config,&overTempB);
 overLimitInitialization(overTemp_Config,&overTempC);
+	
+	
+if(	overTempA.initialized==0 ||
+		overTempB.initialized==0 ||
+		overTempC.initialized==0 ){
+		
+		
+		faultWord.bit.ntcProtectionInit=1;
+		
+		}
 
-}
+	
+}	
+	
+	
+	
+	
+
+
 
 
 void ntcProtections(void){
