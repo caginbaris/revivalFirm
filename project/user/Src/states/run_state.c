@@ -10,24 +10,23 @@
 #include "controlRoutines.h"
 #include "references.h"
 
-static delay_parameters wait4InitialConditions={0,samplingRate*1,0};
-static delay_parameters timeout={0,samplingRate*5,0};
+static delay_parameters wait4InitialConditions={0,samplingRate*5,0};
+static delay_parameters timeout={0,samplingRate*15,0};
 static transition_parameters checked={0};
 
 static uint8_t dcRamp=0;
 
 
 stateID run_state(void){
-
+	
+	
 uint8_t initialCheck;	
 	
 LED.out._2=1;
 
 	
-
-initialCheck=	DI.bit.mcb_in_check==1 &&
-								command.bit.start==1 &&
-								tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.3;
+initialCheck=	DO.bit.mcb_in==1 &&
+							tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.3;
 	
 
 on_delay(initialCheck,&wait4InitialConditions);
@@ -59,7 +58,7 @@ if(checked.output){
 	
 	dcRamp=1;
 
-	// dc initial and final degerler burada atanabilir
+	//cau dc initial and final degerler burada atanabilir
 
 }
 	
@@ -94,13 +93,14 @@ if(currentState!=run){
 	
 	previousState=run;
 	
-	wait4InitialConditions.output=0;
 	wait4InitialConditions.count=0;
+	wait4InitialConditions.output=0;
 	
-	timeout.output=0;
 	timeout.count=0;
-	
+	timeout.output=0;
+
 	checked.output=0;
+	checked.back=0;
 	
 	
 }

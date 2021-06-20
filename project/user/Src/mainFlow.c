@@ -12,6 +12,7 @@
 #include "states.h"
 #include "faultHandling.h"
 #include "pllHandling.h"
+#include "commandHandling.h"
 
 #define samplinfFrequency 50000
 
@@ -25,23 +26,19 @@ void controlRoutines(void);
 
 void mainFlow(void){
 	
-
-	
-	
 	  // mainflow function start 
 		cycleCount=htim2.Instance->CNT;
 		
-		
-		//state_chart();
+		state_chart();
+		commandHandling();
 	
 		measurement();
 		pllHandling();
+		
 		protection();
 	
 		faultHandling();
 	
-		
-
 		controlRoutines();
 		
 		ios();
@@ -52,9 +49,7 @@ void mainFlow(void){
 		
 		cycleCount=htim2.Instance->CNT-cycleCount;
 		cpuLoading=100.0*(double)(cycleCount)/(double)(htim2.Init.Period);
-		
-		
+			
 		// mainflow function end
-
 
 }

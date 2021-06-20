@@ -17,6 +17,7 @@ void faultHandling(void){
 	DO.bit.rst=0;		
 		
 	}
+	/*
 	
 	
 	faultWord.bit.pwrgd_3v3 = (DI.bit.pwrgd_3v3 ==0) ? 1 : 0;
@@ -59,7 +60,7 @@ void faultHandling(void){
 
 
 		
-		/*
+
 		
 		
 		
@@ -91,7 +92,7 @@ void faultHandling(void){
 		*/
 		
 		
-
+	
 
 
 

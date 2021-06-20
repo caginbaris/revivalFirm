@@ -4,7 +4,7 @@
 #include "plib.h"
 #include "faultHandling.h"
 #include "pllHandling.h"
-
+#include "references.h"
 
 #define fs 50000.0
 #define pi_ts (1.0/50000.0)
@@ -122,7 +122,7 @@ void controlRoutines(void){
 	
 	
 	
-	/*
+	
 	clarkeParkTransform(V,&cV,&pV,pll.theta_comp);
 	clarkeParkTransform(I,&cI,&pI,pll.theta_comp);
 	
@@ -158,7 +158,7 @@ void controlRoutines(void){
 	//inverseClarkeParkTransform(pV,&icV,&cOut,theta);
 	
 	
-	*/
+	
 
 
 

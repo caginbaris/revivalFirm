@@ -24,6 +24,8 @@ if(faultWord.all){currentState=fault;}
 if(currentState!=ready){
 
 previousState=ready;
+	
+	
 startTrigger.back=0;
 
 }
