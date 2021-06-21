@@ -46,7 +46,7 @@ void frequencyMeasurement(void){
 
 	frequencyDetect(adc.ch.Van,&fundamentalFrequency,50000.0);
 	on_delay(fundamentalFrequency<49.0,&freqCheck);
-	faultWord.bit.gridFrequency=freqCheck.output;
+	//cau faultWord.bit.gridFrequency=freqCheck.output;
 	
 	
 

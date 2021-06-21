@@ -1,15 +1,18 @@
 
 #include "mlib.h"
+#include "arm_math.h"
 
 void cs_computations(phase_cs_in p_in, phase_cs_out *p_out ){
 
-   p_out->V =sqrt((p_in.Vc)*(p_in.Vc) + (p_in.Vs)*(p_in.Vs))*isqrt2;
-   p_out->I =sqrt((p_in.Ic)*(p_in.Ic) + (p_in.Is)*(p_in.Is))*isqrt2;
+  p_out->V =sqrt((p_in.Vc)*(p_in.Vc) + (p_in.Vs)*(p_in.Vs))*isqrt2;
+  p_out->I =sqrt((p_in.Ic)*(p_in.Ic) + (p_in.Is)*(p_in.Is))*isqrt2;
+	
 
-	 p_out->P	=((p_in.Vc)*(p_in.Ic) +(p_in.Vs)*(p_in.Is))*i2;
-	 p_out->Q	=((p_in.Vs)*(p_in.Ic) -(p_in.Vc)*(p_in.Is))*i2;
+	p_out->P	=((p_in.Vc)*(p_in.Ic) +(p_in.Vs)*(p_in.Is))*i2;
+	p_out->Q	=((p_in.Vs)*(p_in.Ic) -(p_in.Vc)*(p_in.Is))*i2;
 
 }
+
 
 
 void sym_comp( phase_cs_in pa,  phase_cs_in pb, phase_cs_in pc, sym_out*sym){

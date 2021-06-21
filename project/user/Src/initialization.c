@@ -10,6 +10,8 @@ initComp();
 overCurrentInit();
 voltageProtectionsInit();
 ntcProtectionsInit();
+	
+initControlRoutines(); 	
 
 }
 

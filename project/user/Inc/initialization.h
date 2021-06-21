@@ -9,6 +9,9 @@ void overCurrentInit(void);
 void voltageProtectionsInit(void);
 void ntcProtectionsInit(void);
 
+void initControlRoutines(void);
+
 void initialization(void);
+
 
 #endif

@@ -48,7 +48,7 @@ void pllHandling(void){
 			
 			}
 			
-			pllTest();
+			//pllTest();
 
 			on_delay(pll.df>0.1,&syncCheck);
 			

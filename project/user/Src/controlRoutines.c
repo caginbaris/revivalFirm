@@ -14,6 +14,7 @@
 phase V,I;
 park  pV,pI;
 clarke cV,cI;
+sincosValues scVal;
 
 
 piInit pidInit={0},piqInit={0},pidcInit={0};
@@ -39,6 +40,7 @@ pidInit.parameter.atRest=0.0;
 pidInit.limit.refLimitUp=500.0;
 pidInit.limit.refLimitDown=-500.0;
 	
+pidInit.limit.rateLimit=2;
 	
 pidInit.limit.outputLimitUp=200.0f;	
 pidInit.limit.outputLimitDown=-200.0f;
@@ -62,7 +64,8 @@ piqInit.parameter.atRest=0.0;
 piqInit.limit.refLimitUp=900.0;
 piqInit.limit.refLimitDown=-900.0;
 	
-	
+piqInit.limit.rateLimit=40;
+
 piqInit.limit.outputLimitUp=100.0f;	
 piqInit.limit.outputLimitDown=-100.0f;
 
@@ -85,8 +88,8 @@ pidcInit.parameter.atRest=0.0;
 
 pidcInit.limit.refLimitUp=900.0;
 pidcInit.limit.refLimitDown=700.0;
-	
 
+pidcInit.limit.rateLimit=10;
 	
 pidcInit.limit.outputLimitUp=500.0f;	
 pidcInit.limit.outputLimitDown=-500.0f;
@@ -113,18 +116,18 @@ void controlRoutines(void){
 
 
 	V.a=adc.ch.Van;
-	V.c=adc.ch.Vcn;
-	V.b=-adc.ch.Van-adc.ch.Vcn;//cau fictitiously generated
+	V.b=adc.ch.Vbn;
+	V.c=adc.ch.Vcn,
 	
 	I.a=adc.ch.Ia;
 	I.b=adc.ch.Ib;
 	I.c=adc.ch.Ic;
 	
 	
+	tCalculations(pll.theta_comp,&scVal);
 	
-	
-	clarkeParkTransform(V,&cV,&pV,pll.theta_comp);
-	clarkeParkTransform(I,&cI,&pI,pll.theta_comp);
+	clarkeParkTransform(V,&cV,&pV,scVal);
+	clarkeParkTransform(I,&cI,&pI,scVal);
 	
 	
 		//d-side
@@ -148,18 +151,18 @@ void controlRoutines(void){
 	
 	FOF(pidf.signal.controllerOutput,ipVz.d,ipV.d,fofCoefficents1e2);
 	FOF(piqf.signal.controllerOutput,ipVz.q,ipV.q,fofCoefficents1e2);
-	
-	
-	//ipV.d=	pidf.signal.controllerOutput;//-ref.decouplingTermQ;			
-	//ipV.q=	piqf.signal.controllerOutput;//+ref.decouplingTermD;
-					
-					
-	inverseClarkeParkTransform(ipV,&icV,&cOut,pll.theta_comp);
-	//inverseClarkeParkTransform(pV,&icV,&cOut,theta);
-	
-	
-	
 
+	
+	ipV.d=	pidf.signal.controllerOutput;//-ref.decouplingTermQ;			
+	ipV.q=	piqf.signal.controllerOutput;//+ref.decouplingTermD;
+					
+					
+	inverseClarkeParkTransform(ipV,&icV,&cOut,scVal);
+	
+	
+	
+	
+	
 
 
 }

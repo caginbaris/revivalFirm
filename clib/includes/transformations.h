@@ -33,8 +33,16 @@ typedef struct park{
 }park;
 
 
-void clarkeParkTransform(phase x, clarke* c, park* p ,double theta);
-void inverseClarkeParkTransform(park p, clarke* c, phase* x ,double theta);
+typedef struct sincosValues{
+
+	double sinVal;
+	double cosVal;
+	
+}sincosValues;
+
+void tCalculations(double theta,sincosValues* tVal);
+void clarkeParkTransform(phase x, clarke* c, park* p ,sincosValues tVal);
+void inverseClarkeParkTransform(park p, clarke* c, phase* x ,sincosValues tVal);
 
 
 #endif

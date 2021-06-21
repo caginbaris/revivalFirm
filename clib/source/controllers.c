@@ -27,14 +27,14 @@ void piControllerInitialization(piData* pi,piInit init){
 }
 
 
-//maxRate in unit per second
+//maxRate in unit per sec
 double rateLimiter(double x,double xz, double maxRate, double ts){
 
-    float out,rate,dir;
+    double out,rate,dir;
 
     rate=(x-xz)/ts;
 
-    dir=(rate>0)?(1.0f):(-1.0f);
+    dir=(rate>0)?(1.0):(-1.0);
 
     rate*=dir;
 
