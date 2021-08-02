@@ -4,7 +4,7 @@
 
 #define inputNo 14
 #define inputDelayFs 50000.0
-#define inputDelayTime 5
+#define inputDelayTime 1
 #define inputDelayQualSample (int)(inputDelayFs*inputDelayTime)
 
 digitalInputs DI={0};
@@ -15,9 +15,9 @@ digitalOutputs DO={0};
 	
 delay_parameters inputDelay[inputNo]={
 
-{0,5,0},
-{0,5,0},
-{0,5,0},
+{0,2,0},
+{0,2,0},
+{0,2,0},
 {0,inputDelayQualSample,0},
 {0,inputDelayQualSample,0},
 {0,inputDelayQualSample,0},
@@ -35,7 +35,7 @@ delay_parameters inputDelay[inputNo]={
 
 void ios(void){
 
-
+//cau should be revised for whole inputs****!!!!!
 	
 //inputs
 

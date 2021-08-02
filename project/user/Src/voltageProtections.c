@@ -69,6 +69,7 @@ if(	overVoltageDC.initialized==0 ||
 		
 		
 		faultWord.bit.voltageProtectionInit=1;
+			
 		
 		}
 
@@ -89,7 +90,7 @@ void voltageProtections(void){
 	overLimit(max3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),overVoltageAC_Config,&overVoltageAC,0,DO.bit.rst);
 	
 	
-	underLimit(adc.ch.Vdc,underVoltageDC_Config,&underVoltageDC,0,DO.bit.rst); //cau inhibit condition should be added
+	underLimit(adc.ch.Vdc,underVoltageDC_Config,&underVoltageDC,inhibitUV_DC,DO.bit.rst); //cau inhibit condition should be added
 	underLimit(min3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),underVoltageAC_Config,&underVoltageAC,0,DO.bit.rst); //cau inhibit condition should be added
 
 

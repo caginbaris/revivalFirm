@@ -6,6 +6,7 @@ void protection(void){
 overCurrent();
 voltageProtections();
 ntcProtections();
+miscProtections();	
 
 
 }

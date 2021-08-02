@@ -1,5 +1,5 @@
 #include "initialization.h"
-
+#include "pwmGeneration.h" 	
 
 void initialization(void){
 
@@ -11,7 +11,10 @@ overCurrentInit();
 voltageProtectionsInit();
 ntcProtectionsInit();
 	
-initControlRoutines(); 	
+initControlRoutines();
+	
+modulatorDisable();
+
 
 }
 

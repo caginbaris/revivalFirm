@@ -29,6 +29,8 @@ phase  cOut,final;
 
 void initControlRoutines(void){
 	
+//cau should be revised	
+	
 //**************************************
 //**************************************
 	
@@ -40,7 +42,7 @@ pidInit.parameter.atRest=0.0;
 pidInit.limit.refLimitUp=500.0;
 pidInit.limit.refLimitDown=-500.0;
 	
-pidInit.limit.rateLimit=2;
+pidInit.limit.rateLimit=1000;
 	
 pidInit.limit.outputLimitUp=200.0f;	
 pidInit.limit.outputLimitDown=-200.0f;
@@ -130,7 +132,7 @@ void controlRoutines(void){
 	clarkeParkTransform(I,&cI,&pI,scVal);
 	
 	
-		//d-side
+	//d-side
 	
 	pidcf.signal.ref=ref.Vdc;
 	pidcf.signal.feedback=Vdcf;
@@ -160,7 +162,9 @@ void controlRoutines(void){
 	inverseClarkeParkTransform(ipV,&icV,&cOut,scVal);
 	
 	
-	
+	final.a=cOut.a+adc.ch.Van;
+	final.b=cOut.b+adc.ch.Vbn;
+	final.c=cOut.c+adc.ch.Vcn;
 	
 	
 

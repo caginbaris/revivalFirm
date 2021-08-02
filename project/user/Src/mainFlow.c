@@ -13,6 +13,7 @@
 #include "faultHandling.h"
 #include "pllHandling.h"
 #include "commandHandling.h"
+#include "references.h"
 
 #define samplinfFrequency 50000
 
@@ -29,26 +30,28 @@ void mainFlow(void){
 	  // mainflow function start 
 		cycleCount=htim2.Instance->CNT;
 		
-		state_chart();
 		commandHandling();
 	
 		measurement();
 		pllHandling();
 		
 		protection();
-	
-		faultHandling();
-	
-		controlRoutines();
 		
+		faultHandling();
 		ios();
+		
+	
+		references();
+		controlRoutines();
+	
+		state_chart();
 		
 		fToggle(1,&mainFlowSecondCounter);
 		LED.out._1=mainFlowSecondCounter.output;
 		
 		
 		cycleCount=htim2.Instance->CNT-cycleCount;
-		cpuLoading=100.0*(double)(cycleCount)/(double)(htim2.Init.Period);
+		cpuLoading=100.0*(double)(cycleCount)*0.00020837674515524067514065430297979; //(double)(htim2.Init.Period);
 			
 		// mainflow function end
 

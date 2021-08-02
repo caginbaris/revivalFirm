@@ -1,4 +1,5 @@
 #include "states.h"
+#include "adcHandling.h"
 #include "faultHandling.h"
 #include "ios.h"
 #include "plib.h"
@@ -25,16 +26,14 @@ uint8_t initialCheck;
 LED.out._2=1;
 
 	
-initialCheck=	DO.bit.mcb_in==1 &&
-							tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.3;
-	
+initialCheck=	DI.bit.mcb_in_check==1 && tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.3;
 
 on_delay(initialCheck,&wait4InitialConditions);
 	
 on_delay(wait4InitialConditions.output==0,&timeout);
 
 
-if(timeout.output==1){ //cau extra condition needed
+if(timeout.output==1){ 
 
 faultWord.bit.run_state_error=1;
 currentState=fault;
@@ -57,8 +56,7 @@ if(checked.output){
   	
 	
 	dcRamp=1;
-
-	//cau dc initial and final degerler burada atanabilir
+	ref.Vdc=adc.ch.Vdc;
 
 }
 	

@@ -13,8 +13,6 @@ static transition_parameters t={0,0};
 static uint32_t pulseCount=0;
 
 
-//cau only for single invocation
-
 void frequencyDetect(double input,double *output,double samplingFrequency){
 
 
@@ -45,8 +43,8 @@ void frequencyDetect(double input,double *output,double samplingFrequency){
 void frequencyMeasurement(void){
 
 	frequencyDetect(adc.ch.Van,&fundamentalFrequency,50000.0);
-	on_delay(fundamentalFrequency<49.0,&freqCheck);
-	//cau faultWord.bit.gridFrequency=freqCheck.output;
+	on_delay((fundamentalFrequency>51.0 || fundamentalFrequency<49.0),&freqCheck);
+	faultWord.bit.gridFrequency=freqCheck.output;
 	
 	
 

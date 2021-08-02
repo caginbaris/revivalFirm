@@ -4,6 +4,7 @@
 #include "LEDs.h"
 #include "faultHandling.h"
 #include "ios.h"
+#include "pwmGeneration.h"
 
 
 static delay_parameters startupPassTime={0,samplingRate*12,0};
@@ -22,13 +23,17 @@ DO.bit.rst=1;
 
 on_delay(1,&startupPassTime);
 	
+	
 if(startupPassTime.output){
 	
 startupPassTime.count=0;
 
 currentState=ready;	
 	
-if(faultWord.all){currentState=fault;}previousState=startup;}
+if(faultWord.all){currentState=fault;}previousState=startup;
+
+
+}
 
 return currentState;
 

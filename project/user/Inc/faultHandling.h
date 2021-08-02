@@ -41,7 +41,13 @@ typedef union faultInputs{
 		uint64_t ntc2:1; 
 		uint64_t ntc3:1;
 		
+		uint64_t meanIa:1;
+		uint64_t meanIb:1; 
+		uint64_t meanIc:1;
 		
+		uint64_t dcRippleOverLimit:1;
+		
+
 		uint64_t charged_state_error:1;
 		uint64_t idle_state_error:1;
 		uint64_t run_state_error:1;

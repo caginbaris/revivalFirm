@@ -8,7 +8,7 @@ faultInputs faultWord={0};
 
 void faultHandling(void){
 	
-	
+	//cau handle reset command carefully
 	
 	if(DO.bit.rst==1){
 	
@@ -17,7 +17,7 @@ void faultHandling(void){
 	DO.bit.rst=0;		
 		
 	}
-	/*
+	
 	
 	
 	faultWord.bit.pwrgd_3v3 = (DI.bit.pwrgd_3v3 ==0) ? 1 : 0;
@@ -29,10 +29,6 @@ void faultHandling(void){
 	faultWord.bit.hb3_fault= !DI.bit.hb3_fault;	
 	
 		
-	// handled in cmp uint32_t comp_vdc:1;
-	// handled in cmpuint32_t comp_v5:1; 
-		
-	
 	faultWord.bit.oc_rms_L1=overCurrentRMS_L1.trip_latch;
 	faultWord.bit.oc_rms_L2=overCurrentRMS_L2.trip_latch;
 	faultWord.bit.oc_rms_L3=overCurrentRMS_L3.trip_latch;
@@ -48,9 +44,6 @@ void faultHandling(void){
 	faultWord.bit.ov_dc=overVoltageDC.trip_latch;
 	faultWord.bit.ov_ac=overVoltageAC.trip_latch;
 	
-	faultWord.bit.uv_dc=overVoltageDC.trip_latch;
-	faultWord.bit.uv_ac=overVoltageAC.trip_latch;
-	
 	faultWord.bit.uv_dc=underVoltageDC.trip_latch;
 	faultWord.bit.uv_ac=underVoltageAC.trip_latch;
 	
@@ -60,40 +53,5 @@ void faultHandling(void){
 
 
 		
-
-		
-		
-		
-		// handled in states
-		
-		uint32_t charged_state_error:1;
-		uint32_t idle_state_error:1;
-		uint32_t run_state_error:1;
-		
-		
-		
-		// handled in init routines 
-		
-		uint64_t overCurrentProtectionInit:1;
-		uint64_t voltageProtectionInit:1;
-		uint64_t ntcProtectionInit:1;
-		
-		
-		
-		//handled in pll routine
-		uint64_t synchronization:1;
-		
-		//handled in adc
-		uint64_t analogWatchDogFired:1;
-		
-		//handled in measurement
-		uint64_t inputFrequency:1;
-
-		*/
-		
-		
-	
-
-
 
 }

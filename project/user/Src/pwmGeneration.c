@@ -2,14 +2,12 @@
 #include "tim.h"
 #include "pwmGeneration.h"
 #include "plib.h"
-
-
-
-
+#include "controlRoutines.h"
+#include "references.h"
 
 uint16_t sw_count_a=300;
-uint16_t sw_count_b=600;
-uint16_t sw_count_c=600;
+uint16_t sw_count_b=300;
+uint16_t sw_count_c=300;
 
 
 
@@ -49,11 +47,11 @@ void modulatorEnable(void){
 
 void modulator(void){
 	
-	/*
+	
 	sw_count_a=wscale*(final.a+ref.Vdc*0.5)/ref.Vdc;
 	sw_count_b=wscale*(final.b+ref.Vdc*0.5)/ref.Vdc;
 	sw_count_c=wscale*(final.c+ref.Vdc*0.5)/ref.Vdc;
-	*/
+	
 	
 	ui_LIMITER(sw_count_a,0,wscale);
 	ui_LIMITER(sw_count_b,0,wscale);

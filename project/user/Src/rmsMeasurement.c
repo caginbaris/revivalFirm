@@ -48,8 +48,8 @@ void rmsMeasurement(void){
 		trueRMS_sampled(adc.ch.Vcn-adc.ch.Van,&tRMS[8],periodCounter);
 		
 		
-		//cau trueRMS_sampled(adc.ch.Vdc,&tRMS[9],periodCounter);
-		tRMS[9].out=100;
+		trueRMS_sampled(adc.ch.Vdc,&tRMS[9],periodCounter);
+
 		
 		trueRMS_sampled(sym.V0,&tRMS[10],periodCounter);
 		trueRMS_sampled(sym.V1,&tRMS[11],periodCounter);

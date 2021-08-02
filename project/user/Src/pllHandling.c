@@ -28,7 +28,7 @@ void pllHandling(void){
 	
 		static double vf=0,vz=0;
 	
-		FOF(adc.ch.Van,vz,vf,fofCoefficents5em1); // to be checked
+		FOF(adc.ch.Van,vz,vf,fofCoefficents5em1); 
 		vz=-vz; // for hp handling
 		
 		
