@@ -18,7 +18,7 @@ underLimit_outputParameters underVoltageDC, underVoltageAC;
 void voltageProtectionsInit(void){
 
 
-overVoltageDC_Config.level=10;
+overVoltageDC_Config.level=100;
 overVoltageDC_Config.delay=0.01;
 overVoltageDC_Config.dropout_ratio=0.99;
 overVoltageDC_Config.dropout_time=0.01;
@@ -80,7 +80,8 @@ if(	overVoltageDC.initialized==0 ||
 
 void voltageProtections(void){
 	
-	uint8_t inhibitUV_DC;
+	uint8_t inhibitUV_DC=0;
+
 	
 	underVoltageDC_Config.level=5;//tRMS[rms_Van].out*1.414*0.8; //cau config and real parameters 
 	inhibitUV_DC=(currentState==charged ||currentState==idle || currentState==run )?(0):(1);
@@ -91,7 +92,7 @@ void voltageProtections(void){
 	
 	
 	underLimit(adc.ch.Vdc,underVoltageDC_Config,&underVoltageDC,inhibitUV_DC,DO.bit.rst); //cau inhibit condition should be added
-	underLimit(min3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),underVoltageAC_Config,&underVoltageAC,0,DO.bit.rst); //cau inhibit condition should be added
+	underLimit(min3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),underVoltageAC_Config,&underVoltageAC,DI.bit.mcb_in_check==0,DO.bit.rst); //cau inhibit condition should be added
 
 
 }

@@ -49,9 +49,9 @@ void csMeasurement(void){
 	SOS(adc.ch.Ib,cs_Bin.Ic,sosCoefficentsD,sos_pDQ[7]);
 	SOS(adc.ch.Ic,cs_Cin.Ic,sosCoefficentsD,sos_pDQ[8]);
 	
-	SOS(adc.ch.Van,cs_Ain.Is,sosCoefficentsQ,sos_pDQ[9]);
-	SOS(adc.ch.Vbn,cs_Bin.Is,sosCoefficentsQ,sos_pDQ[10]);
-	SOS(adc.ch.Vcn,cs_Cin.Is,sosCoefficentsQ,sos_pDQ[11]);
+	SOS(adc.ch.Ia,cs_Ain.Is,sosCoefficentsQ,sos_pDQ[9]);
+	SOS(adc.ch.Ib,cs_Bin.Is,sosCoefficentsQ,sos_pDQ[10]);
+	SOS(adc.ch.Ic,cs_Cin.Is,sosCoefficentsQ,sos_pDQ[11]);
 	
 	
 	if(++periodCounter==3){periodCounter=0;}

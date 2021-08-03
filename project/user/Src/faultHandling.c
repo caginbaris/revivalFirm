@@ -20,7 +20,7 @@ void faultHandling(void){
 	
 	
 	
-	faultWord.bit.pwrgd_3v3 = (DI.bit.pwrgd_3v3 ==0) ? 1 : 0;
+	//faultWord.bit.pwrgd_3v3 = (DI.bit.pwrgd_3v3 ==0) ? 1 : 0;
 	faultWord.bit.pwrgd_v5 = 	(adc.ch.v5<4.85) ? 1 : 0;
 	faultWord.bit.pwrgd_24v = (DI.bit.pwrgd_24v) ;
 	

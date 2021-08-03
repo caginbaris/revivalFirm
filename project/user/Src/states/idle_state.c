@@ -18,9 +18,11 @@ LED.out._3=0;
 
 on_delay(1,&waiting4dcLevel);
 	
-if(waiting4dcLevel.output==1 && DI.bit.mcb_in_check==1){
+//cau add timeout
+	
+if(waiting4dcLevel.output==1 && DO.bit.mcb_in==1){
 
-	if(tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.3){
+	if(tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.1){
 
 	currentState=run;	
 
@@ -30,10 +32,11 @@ if(waiting4dcLevel.output==1 && DI.bit.mcb_in_check==1){
 	currentState=fault;
 
 	}
+	
+
 
 }	
 	
-
 
 
 if(faultWord.all){currentState=fault;}

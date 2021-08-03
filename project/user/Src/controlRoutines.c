@@ -119,7 +119,7 @@ void controlRoutines(void){
 
 	V.a=adc.ch.Van;
 	V.b=adc.ch.Vbn;
-	V.c=adc.ch.Vcn,
+	V.c=adc.ch.Vcn;
 	
 	I.a=adc.ch.Ia;
 	I.b=adc.ch.Ib;

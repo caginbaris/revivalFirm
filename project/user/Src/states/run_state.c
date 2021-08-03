@@ -26,7 +26,7 @@ uint8_t initialCheck;
 LED.out._2=1;
 
 	
-initialCheck=	DI.bit.mcb_in_check==1 && tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.3;
+initialCheck=	DO.bit.mcb_in==1 && tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.1;
 
 on_delay(initialCheck,&wait4InitialConditions);
 	

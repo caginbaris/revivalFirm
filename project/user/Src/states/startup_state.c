@@ -19,7 +19,7 @@ fToggle(1,&startupToggle);
 LED.out._2=startupToggle.output;
 LED.out._3=startupToggle.output;
 	
-DO.bit.rst=1;	
+
 
 on_delay(1,&startupPassTime);
 	
@@ -32,6 +32,7 @@ currentState=ready;
 	
 if(faultWord.all){currentState=fault;}previousState=startup;
 
+DO.bit.rst=1;	
 
 }
 

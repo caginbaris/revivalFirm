@@ -50,7 +50,7 @@ void pllHandling(void){
 			
 			//pllTest();
 
-			on_delay(pll.df>0.1,&syncCheck);
+			on_delay(pll.qf<0.5,&syncCheck);
 			
 			if(syncCheck.output){faultWord.bit.synchronization=1;}
 		

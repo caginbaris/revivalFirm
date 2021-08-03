@@ -33,10 +33,11 @@ void mainFlow(void){
 		commandHandling();
 	
 		measurement();
-		pllHandling();
+		//pllHandling();
 		
 		protection();
 		
+		state_chart();
 		faultHandling();
 		ios();
 		
@@ -44,7 +45,7 @@ void mainFlow(void){
 		references();
 		controlRoutines();
 	
-		state_chart();
+		
 		
 		fToggle(1,&mainFlowSecondCounter);
 		LED.out._1=mainFlowSecondCounter.output;

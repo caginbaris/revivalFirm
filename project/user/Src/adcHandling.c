@@ -177,9 +177,9 @@ void initAdc(void){
 	offset.ch.Vcn=32820;
 	offset.ch.Vdc=10;
 	
-	offset.ch.Ia=32781; 
-	offset.ch.Ib=32718;
-	offset.ch.Ic=32747;
+	offset.ch.Ia=32780; 
+	offset.ch.Ib=32730;
+	offset.ch.Ic=32755;
 	
 	offset.ch.NTCa=0;
 	offset.ch.NTCb=0;

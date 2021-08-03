@@ -13,7 +13,7 @@ overLimit_outputParameters overTempA,overTempB,overTempC;
 void ntcProtectionsInit(void){
 
 
-overTemp_Config.level=28;
+overTemp_Config.level=40;
 overTemp_Config.delay=10;
 overTemp_Config.dropout_ratio=0.99;
 overTemp_Config.dropout_time=0.01;
