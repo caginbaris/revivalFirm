@@ -33,7 +33,7 @@ void mainFlow(void){
 		commandHandling();
 	
 		measurement();
-		//pllHandling();
+		pllHandling();
 		
 		protection();
 		

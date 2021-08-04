@@ -59,4 +59,6 @@ extern ntcVariables ntcVar;
 
 void measurement(void);
 
+extern uint16_t calculationCounter;
+
 #endif

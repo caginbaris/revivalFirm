@@ -64,8 +64,8 @@ if(checked.output){
 
 if(dcRamp){
 	
-//cau ref.Vdc=ref.Vdc_initial+(ref.Vdc_final-ref.Vdc_initial)*0.000002;	// increased from init2final in 10 sec
-//cau if(ref.Vdc>ref.Vdc_final){ref.Vdc=ref.Vdc_final,dcRamp=0;}	
+ref.Vdc+=0.00002;	// increased from init2final in 10 sec
+if(ref.Vdc>ref.Vdc_final){ref.Vdc=ref.Vdc_final,dcRamp=0;}	
 	
 }
 

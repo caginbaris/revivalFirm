@@ -35,6 +35,7 @@ void csMeasurement(void){
 	
 	static uint8_t periodCounter=0;
 	
+	//cau in case of time pressure voltage side can be omitted with revised protection part at voltageprotection
 	
 	SOS(adc.ch.Van,cs_Ain.Vc,sosCoefficentsD,sos_pDQ[0]);
 	SOS(adc.ch.Vbn,cs_Bin.Vc,sosCoefficentsD,sos_pDQ[1]);

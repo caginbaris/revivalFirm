@@ -46,6 +46,7 @@ typedef union faultInputs{
 		uint64_t meanIc:1;
 		
 		uint64_t dcRippleOverLimit:1;
+		uint64_t phaseSequenceControl:1;
 		
 
 		uint64_t charged_state_error:1;

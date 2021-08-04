@@ -3,6 +3,7 @@
 #include "measurement.h"
 #include "ios.h"
 #include "faultHandling.h"
+#include "states.h"
 
 double meanValueIa=0;
 double meanValueIb=0;
@@ -54,17 +55,35 @@ void dcRippleCheck(void){
 	
 	static delay_parameters dcRippleDelay={0,50000,0};
 	
-	on_delay(dcRipple>50.0,&dcRippleDelay);
+	on_delay(dcRipple>50.0,&dcRippleDelay); //fcau check for actual values while it's running
 	
 	faultWord.bit.dcRippleOverLimit=dcRippleDelay.output;
 	
 
 }
 
+
+void phaseSeqCheck(void){
+	
+	static delay_parameters phaseSeqDelay={0,50000,0};
+	
+	on_delay(sym.V2>sym.V1,&phaseSeqDelay);
+	
+	faultWord.bit.phaseSequenceControl=phaseSeqDelay.output;
+	
+
+}
+
+
+
+
+
 void miscProtections(){
 
 	meanCurrentCheck();
 	dcRippleCheck();
+	
+	if(currentState!=run){phaseSeqCheck();}
 	
 
 }

@@ -162,9 +162,9 @@ void initAdc(void){
 	scale.ch.Vcn=-0.022456*0.5;
 	scale.ch.Vdc=0.0101201771031;
 	
-	scale.ch.Ia=-0.00606; //cau neg sign,  not 3.3v , 3.27v act
-	scale.ch.Ib=0.005959;
-	scale.ch.Ic=0.006049;
+	scale.ch.Ia=0.00606; //cau neg sign,  not 3.3v , 3.27v act
+	scale.ch.Ib=-0.005959;
+	scale.ch.Ic=-0.006049;
 	
 	scale.ch.NTCa=1.65/32767.0;
 	scale.ch.NTCb=1.65/32767.0;

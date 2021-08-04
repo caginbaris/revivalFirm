@@ -30,36 +30,32 @@ trueRMS_sampled_parameters tRMS[17]={
 
 void rmsMeasurement(void){
 	
-		static uint16_t periodCounter=0;
-	
-		if(++periodCounter==10000){periodCounter=0;}
+
+		trueRMS_sampled(adc.ch.Ia,&tRMS[0],calculationCounter);
+		trueRMS_sampled(adc.ch.Ib,&tRMS[1],calculationCounter);
+		trueRMS_sampled(adc.ch.Ic,&tRMS[2],calculationCounter);
+		
+		trueRMS_sampled(adc.ch.Van,&tRMS[3],calculationCounter);
+		trueRMS_sampled(adc.ch.Vbn,&tRMS[4],calculationCounter);
+		trueRMS_sampled(adc.ch.Vcn,&tRMS[5],calculationCounter);
+		
+		trueRMS_sampled(adc.ch.Van-adc.ch.Vbn,&tRMS[6],calculationCounter);
+		trueRMS_sampled(adc.ch.Vbn-adc.ch.Vcn,&tRMS[7],calculationCounter);
+		trueRMS_sampled(adc.ch.Vcn-adc.ch.Van,&tRMS[8],calculationCounter);
 		
 		
-		trueRMS_sampled(adc.ch.Ia,&tRMS[0],periodCounter);
-		trueRMS_sampled(adc.ch.Ib,&tRMS[1],periodCounter);
-		trueRMS_sampled(adc.ch.Ic,&tRMS[2],periodCounter);
-		
-		trueRMS_sampled(adc.ch.Van,&tRMS[3],periodCounter);
-		trueRMS_sampled(adc.ch.Vbn,&tRMS[4],periodCounter);
-		trueRMS_sampled(adc.ch.Vcn,&tRMS[5],periodCounter);
-		
-		trueRMS_sampled(adc.ch.Van-adc.ch.Vbn,&tRMS[6],periodCounter);
-		trueRMS_sampled(adc.ch.Vbn-adc.ch.Vcn,&tRMS[7],periodCounter);
-		trueRMS_sampled(adc.ch.Vcn-adc.ch.Van,&tRMS[8],periodCounter);
-		
-		
-		trueRMS_sampled(adc.ch.Vdc,&tRMS[9],periodCounter);
+		trueRMS_sampled(adc.ch.Vdc,&tRMS[9],calculationCounter);
 
 		
-		trueRMS_sampled(sym.V0,&tRMS[10],periodCounter);
-		trueRMS_sampled(sym.V1,&tRMS[11],periodCounter);
-		trueRMS_sampled(sym.V2,&tRMS[12],periodCounter);
+		trueRMS_sampled(sym.V0,&tRMS[10],calculationCounter);
+		trueRMS_sampled(sym.V1,&tRMS[11],calculationCounter);
+		trueRMS_sampled(sym.V2,&tRMS[12],calculationCounter);
 		
-		trueRMS_sampled(sym.I0,&tRMS[13],periodCounter);
-		trueRMS_sampled(sym.I1,&tRMS[14],periodCounter);
-		trueRMS_sampled(sym.I2,&tRMS[15],periodCounter);
+		trueRMS_sampled(sym.I0,&tRMS[13],calculationCounter);
+		trueRMS_sampled(sym.I1,&tRMS[14],calculationCounter);
+		trueRMS_sampled(sym.I2,&tRMS[15],calculationCounter);
 		
-		trueRMS_sampled(dcRipple,&tRMS[16],periodCounter);
+		trueRMS_sampled(dcRipple,&tRMS[16],calculationCounter);
 		
 
 }

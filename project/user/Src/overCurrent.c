@@ -21,7 +21,7 @@ overLimit_outputParameters overCurrentPeak_L1,overCurrentPeak_L2,overCurrentPeak
 void overCurrentInit(void){
 
 
-overCurrentRMS_Config.level=1;
+overCurrentRMS_Config.level=2.5;
 overCurrentRMS_Config.delay=0.04;
 overCurrentRMS_Config.dropout_ratio=0.99;
 overCurrentRMS_Config.dropout_time=0.01;
@@ -34,7 +34,7 @@ overLimitInitialization(overCurrentRMS_Config,&overCurrentRMS_L2);
 overLimitInitialization(overCurrentRMS_Config,&overCurrentRMS_L3);	
 	
 	
-overCurrentCS_Config.level=2;
+overCurrentCS_Config.level=3;
 overCurrentCS_Config.delay=0.005;
 overCurrentCS_Config.dropout_ratio=0.99;
 overCurrentCS_Config.dropout_time=0.001;
@@ -47,7 +47,7 @@ overLimitInitialization(overCurrentCS_Config,&overCurrentCS_L2);
 overLimitInitialization(overCurrentCS_Config,&overCurrentCS_L3);		
 
 
-overCurrentPeak_Config.level=3;
+overCurrentPeak_Config.level=4*1.414;
 overCurrentPeak_Config.delay=0.001;
 overCurrentPeak_Config.dropout_ratio=0.99;
 overCurrentPeak_Config.dropout_time=0.0005;
@@ -73,6 +73,12 @@ if(	overCurrentRMS_L1.initialized==0 ||overCurrentCS_L1.initialized==0 ||overCur
 
 void overCurrent(void){
 	
+	double absA,absB,absC;
+	
+	absA=adc.ch.Ia>0?adc.ch.Ia:-adc.ch.Ia;
+	absB=adc.ch.Ib>0?adc.ch.Ib:-adc.ch.Ib;
+	absC=adc.ch.Ic>0?adc.ch.Ic:-adc.ch.Ic;
+	
 	overLimit(tRMS[rms_Ia].out,overCurrentRMS_Config,&overCurrentRMS_L1,0,DO.bit.rst);
 	overLimit(tRMS[rms_Ib].out,overCurrentRMS_Config,&overCurrentRMS_L2,0,DO.bit.rst);
 	overLimit(tRMS[rms_Ic].out,overCurrentRMS_Config,&overCurrentRMS_L3,0,DO.bit.rst);
@@ -81,10 +87,9 @@ void overCurrent(void){
 	overLimit(cs_Bout.I,overCurrentCS_Config,&overCurrentCS_L2,0,DO.bit.rst);
 	overLimit(cs_Cout.I,overCurrentCS_Config,&overCurrentCS_L3,0,DO.bit.rst);
 
-	
-	overLimit(adc.ch.Ia,overCurrentPeak_Config,&overCurrentPeak_L1,0,DO.bit.rst);
-	overLimit(adc.ch.Ib,overCurrentPeak_Config,&overCurrentPeak_L2,0,DO.bit.rst);
-	overLimit(adc.ch.Ic,overCurrentPeak_Config,&overCurrentPeak_L3,0,DO.bit.rst);
+	overLimit(absA,overCurrentPeak_Config,&overCurrentPeak_L1,0,DO.bit.rst);
+	overLimit(absB,overCurrentPeak_Config,&overCurrentPeak_L2,0,DO.bit.rst);
+	overLimit(absC,overCurrentPeak_Config,&overCurrentPeak_L3,0,DO.bit.rst);
 
 
 }
