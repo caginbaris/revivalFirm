@@ -11,11 +11,11 @@ void pllTest(void){
 	
 	if(pll.theta_comp >0 && pll.theta_comp<_pi){
 	
-		LED.out._2=1;
+		LED.out._3=1;
 	
 	}else{
 	
-		LED.out._2=0;
+		LED.out._3=0;
 		
 	}
 	

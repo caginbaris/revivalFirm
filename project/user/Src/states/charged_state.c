@@ -18,7 +18,7 @@ LED.out._3=0;
 
 on_delay(1,&waiting4dcLevel);
 	
-if(waiting4dcLevel.output==1 || tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.2){
+if(waiting4dcLevel.output==1 || tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.1){
 
 	if(tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.1){
 		

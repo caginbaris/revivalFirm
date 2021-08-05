@@ -10,6 +10,7 @@
 #include "pwmGeneration.h"
 #include "controlRoutines.h"
 #include "references.h"
+#include "testBenches.h"
 
 static delay_parameters wait4InitialConditions={0,samplingRate*5,0};
 static delay_parameters timeout={0,samplingRate*15,0};
@@ -35,18 +36,20 @@ on_delay(wait4InitialConditions.output==0,&timeout);
 
 if(timeout.output==1){ 
 
+if(LED.out._3==0){
+
 faultWord.bit.run_state_error=1;
-currentState=fault;
+currentState=fault;}
 
 }	
 	
 	
 low2highTransition(wait4InitialConditions.output,&checked);
-
+switchingTest();
 
 if(checked.output){
 	
-	LED.out._3=1;
+	LED.out._3=1; 
 	
 	//modulatorEnable();
 
@@ -75,9 +78,6 @@ if(ref.Vdc>ref.Vdc_final){ref.Vdc=ref.Vdc_final,dcRamp=0;}
 
 if(command.bit.stop){currentState=stopped;}
 if(faultWord.all){currentState=fault;}
-
-
-
 if(currentState!=run){
 	
 	

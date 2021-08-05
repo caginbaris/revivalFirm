@@ -80,15 +80,15 @@ if(	overVoltageDC.initialized==0 ||
 
 void voltageProtections(void){
 	
-	uint8_t inhibitUV_DC=0;
+	uint8_t inhibitUV=0;
 
-	inhibitUV_DC=(currentState!=run )?(0):(1);
+	inhibitUV=(currentState!=run);
 
 	overLimit(adc.ch.Vdc,overVoltageDC_Config,&overVoltageDC,0,DO.bit.rst);
 	overLimit(max3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),overVoltageAC_Config,&overVoltageAC,0,DO.bit.rst);
 	
-	underLimit(adc.ch.Vdc,underVoltageDC_Config,&underVoltageDC,inhibitUV_DC,DO.bit.rst); 
-	underLimit(min3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),underVoltageAC_Config,&underVoltageAC,DO.bit.mcb_in==0,DO.bit.rst); 
+	//cau underLimit(adc.ch.Vdc,underVoltageDC_Config,&underVoltageDC,inhibitUV,DO.bit.rst); 
+	//cau underLimit(min3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),underVoltageAC_Config,&underVoltageAC,inhibitUV,DO.bit.rst); 
 
 
 }
