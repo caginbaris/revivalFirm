@@ -10,6 +10,7 @@ void voltageProtectionsInit(void);
 void ntcProtectionsInit(void);
 
 void initControlRoutines(void);
+void init_references(void);
 
 void initialization(void);
 

@@ -33,10 +33,8 @@ void mainFlow(void){
 		commandHandling();
 	
 		measurement();
-		pllHandling();
-		
 		protection();
-		
+		pllHandling();
 		state_chart();
 		faultHandling();
 		ios();

@@ -32,7 +32,7 @@ void dcMeasurement(void){
 	
 	
 SOS(adc.ch.Vdc,dcAverage,sosCoefficentsDC,sos_pDC);
-dcRipple=adc.ch.Vdc-dcAverage; //cau a protection should be defined
+dcRipple=adc.ch.Vdc-dcAverage; 
 FOF(adc.ch.Vdc,Vdcz,Vdcf,fofCoefficents1e2); //cau check for  Vdcf
 
 

@@ -10,7 +10,8 @@ initComp();
 overCurrentInit();
 voltageProtectionsInit();
 ntcProtectionsInit();
-	
+
+init_references();	
 initControlRoutines();
 	
 modulatorDisable();

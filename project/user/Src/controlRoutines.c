@@ -29,7 +29,7 @@ phase  cOut,final;
 
 void initControlRoutines(void){
 	
-//cau should be revised	
+
 	
 //**************************************
 //**************************************
@@ -41,8 +41,9 @@ pidInit.parameter.atRest=0.0;
 	
 pidInit.limit.refLimitUp=20.0;
 pidInit.limit.refLimitDown=-20.0;
+		
 	
-pidInit.limit.rateLimit=20;
+pidInit.limit.rateLimit=200;
 	
 pidInit.limit.outputLimitUp=20.0f;	
 pidInit.limit.outputLimitDown=-20.0f;

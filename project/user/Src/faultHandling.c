@@ -8,7 +8,6 @@ faultInputs faultWord={0};
 
 void faultHandling(void){
 	
-	//cau handle reset command carefully
 	
 	if(DO.bit.rst==1){
 	

@@ -32,7 +32,7 @@ void HAL_COMP_TriggerCallback(COMP_HandleTypeDef *hcomp){
 	if(hcomp->Instance==COMP1){
 		
 		
-		//cau faultWord.bit.comp_vdc=1;
+		faultWord.bit.comp_vdc=1;
 	
 	
 	}

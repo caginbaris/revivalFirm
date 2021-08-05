@@ -56,7 +56,7 @@ void modulator(void){
 	//sw_count_c=wscale*(final.c+ref.Vdc*0.5)/ref.Vdc;
 	
 	
-	//cau
+	//cau only for dummy check
 	if(tRMS[3].out>1.0 && tRMS[4].out>1.0 && tRMS[5].out>1.0 ){
 	
 	sw_count_a=wscale*(adc.ch.Van/(tRMS[3].out*1.414)+1)*0.5;
