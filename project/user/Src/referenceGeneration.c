@@ -25,8 +25,8 @@ static double fofCoefficents1e0[2]={
 void init_references(void){
 
 
-ref.Vdc=56;
-ref.Vdc_final=65;	
+ref.Vdc=35;
+ref.Vdc_final=40;	
 	
 ref.Q=0;
 ref.I=0;		
@@ -47,7 +47,7 @@ void references(void){
 	//FOF((tRMS[rms_Vab].out*1.414),ref_iz,ref.Vdc_initial,fofCoefficents1e0);
 	//FOF((tRMS[rms_Van].out+requiredVoltage)*sqrt3*idc2ac,ref_fz,ref.Vdc_final,fofCoefficents1e0);
 	
-	//cau decoupling terms should be added
+	
 								
 	
 

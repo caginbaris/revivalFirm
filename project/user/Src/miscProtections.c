@@ -41,13 +41,14 @@ void meanCurrentCheck(void){
 		
 	}
 	
-
-	faultWord.bit.meanIa=(meanValueIa>1.0);
-	faultWord.bit.meanIb=(meanValueIb>1.0);
-	faultWord.bit.meanIc=(meanValueIc>1.0);
+	if(faultWord.all==0){
+		
+	faultWord.bit.meanIa=(meanValueIa>2.0);
+	faultWord.bit.meanIb=(meanValueIb>2.0);
+	faultWord.bit.meanIc=(meanValueIc>2.0);
+		
+	}
 	
-
-
 }
 
 
@@ -55,7 +56,7 @@ void dcRippleCheck(void){
 	
 	static delay_parameters dcRippleDelay={0,50000,0};
 	
-	on_delay(dcRipple>50.0,&dcRippleDelay); //cau check for actual values while it's running
+	on_delay(dcRipple>50.0,&dcRippleDelay); 
 	
 	faultWord.bit.dcRippleOverLimit=dcRippleDelay.output;
 	

@@ -27,7 +27,7 @@ uint8_t initialCheck;
 LED.out._2=1;
 
 	
-initialCheck=	DO.bit.mcb_in==1 && tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.2;
+initialCheck=	DO.bit.mcb_in==1 && tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.15;
 
 on_delay(initialCheck,&wait4InitialConditions);
 	
@@ -39,19 +39,20 @@ if(timeout.output==1){
 if(LED.out._3==0){
 
 faultWord.bit.run_state_error=1;
-currentState=fault;}
+	
+}
 
 }	
 	
 	
 low2highTransition(wait4InitialConditions.output,&checked);
-switchingTest();
+
 
 if(checked.output){
 	
 	LED.out._3=1; 
 	
-	//modulatorEnable();
+	modulatorEnable();
 
 	pidcf.flag.enable=1;
 	piqf.flag.enable=1;
@@ -59,7 +60,7 @@ if(checked.output){
   	
 	
 	dcRamp=1;
-	ref.Vdc=adc.ch.Vdc;
+	ref.Vdc=Vdcf;
 
 }
 	
@@ -78,10 +79,13 @@ if(ref.Vdc>ref.Vdc_final){ref.Vdc=ref.Vdc_final,dcRamp=0;}
 
 if(command.bit.stop){currentState=stopped;}
 if(faultWord.all){currentState=fault;}
+
 if(currentState!=run){
 	
 	
 	modulatorDisable();
+	
+	recorder();
 	
 	pidcf.flag.enable=0;
 	piqf.flag.enable=0;

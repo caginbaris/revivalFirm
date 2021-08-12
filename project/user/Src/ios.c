@@ -35,7 +35,7 @@ delay_parameters inputDelay[inputNo]={
 
 void ios(void){
 
-//cau should be revised for whole inputs****!!!!!
+
 	
 //inputs
 
@@ -47,18 +47,18 @@ on_off_delay(HAL_GPIO_ReadPin(PWRGD_3v3_GPIO_Port,PWRGD_3v3_Pin),&inputDelay[3])
 on_off_delay(HAL_GPIO_ReadPin(PWRGD_24v_GPIO_Port,PWRGD_24v_Pin),&inputDelay[4]);
 on_off_delay(HAL_GPIO_ReadPin(extInput_GPIO_Port,extInput_Pin),&inputDelay[5]);
 
-on_off_delay(HAL_GPIO_ReadPin(MCB_in_check_GPIO_Port,MCB_in_check_Pin),&inputDelay[6]);
+//on_off_delay(HAL_GPIO_ReadPin(MCB_in_check_GPIO_Port,MCB_in_check_Pin),&inputDelay[6]);
 on_off_delay(HAL_GPIO_ReadPin(PBin_GPIO_Port,PBin_Pin),&inputDelay[7]);
 
-off_delay(HAL_GPIO_ReadPin(HB1pIn_GPIO_Port,HB1pIn_Pin),&inputDelay[8]);
-off_delay(HAL_GPIO_ReadPin(HB2pIn_GPIO_Port,HB2pIn_Pin),&inputDelay[9]);
-off_delay(HAL_GPIO_ReadPin(HB3pIn_GPIO_Port,HB3pIn_Pin),&inputDelay[10]);
+//off_delay(HAL_GPIO_ReadPin(HB1pIn_GPIO_Port,HB1pIn_Pin),&inputDelay[8]);
+//off_delay(HAL_GPIO_ReadPin(HB2pIn_GPIO_Port,HB2pIn_Pin),&inputDelay[9]);
+//off_delay(HAL_GPIO_ReadPin(HB3pIn_GPIO_Port,HB3pIn_Pin),&inputDelay[10]);
 
-off_delay(HAL_GPIO_ReadPin(HB1nIn_GPIO_Port,HB1nIn_Pin),&inputDelay[11]);
-off_delay(HAL_GPIO_ReadPin(HB2nIn_GPIO_Port,HB2nIn_Pin),&inputDelay[12]);
-off_delay(HAL_GPIO_ReadPin(HB3nIn_GPIO_Port,HB3nIn_Pin),&inputDelay[13]);
+//off_delay(HAL_GPIO_ReadPin(HB1nIn_GPIO_Port,HB1nIn_Pin),&inputDelay[11]);
+//off_delay(HAL_GPIO_ReadPin(HB2nIn_GPIO_Port,HB2nIn_Pin),&inputDelay[12]);
+//off_delay(HAL_GPIO_ReadPin(HB3nIn_GPIO_Port,HB3nIn_Pin),&inputDelay[13]);
 
-//cau comparator outputs stiil waiting
+
 
 
 //outputs

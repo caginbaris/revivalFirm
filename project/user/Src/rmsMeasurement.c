@@ -1,10 +1,11 @@
 #include "adcHandling.h"
 #include "mlib.h"
 #include "measurement.h"
+#include "controlRoutines.h"
 
 rmsChannel_Type rmsSeq=rms_Ia;
 
-trueRMS_sampled_parameters tRMS[17]={
+trueRMS_sampled_parameters tRMS[20]={
 	
 {0,0,0},
 {0,0,1},
@@ -23,6 +24,9 @@ trueRMS_sampled_parameters tRMS[17]={
 {0,0,14},
 {0,0,15},
 {0,0,16},
+{0,0,17},
+{0,0,18},
+{0,0,19},
 
 };
 
@@ -57,5 +61,8 @@ void rmsMeasurement(void){
 		
 		trueRMS_sampled(dcRipple,&tRMS[16],calculationCounter);
 		
+		trueRMS_sampled(final.a,&tRMS[17],calculationCounter);
+		trueRMS_sampled(final.b,&tRMS[18],calculationCounter);
+		trueRMS_sampled(final.c,&tRMS[19],calculationCounter);
 
 }

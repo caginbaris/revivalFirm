@@ -20,14 +20,14 @@ on_delay(1,&waiting4dcLevel);
 	
 if(waiting4dcLevel.output==1){
 
-	if(tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.2 && DO.bit.mcb_in==1){
+	if(tRMS[rms_Vdc].out>tRMS[rms_Vab].out*1.15 && DO.bit.mcb_in==1){
 
 	currentState=run;	
 
 	}else{
 
 	faultWord.bit.idle_state_error=1;
-	currentState=fault;
+	
 
 	}
 	

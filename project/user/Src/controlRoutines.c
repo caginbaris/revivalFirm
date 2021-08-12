@@ -2,6 +2,7 @@
 #include "measurement.h"
 #include "clib.h"
 #include "plib.h"
+#include "mlib.h"
 #include "faultHandling.h"
 #include "pllHandling.h"
 #include "references.h"
@@ -23,9 +24,16 @@ piData pidf={0},piqf={0},pidcf={0};
 clarke icV;
 park   ipV,ipVz;
 phase  cOut,final;
+phase filteredV={0},filteredVz={0};
 
 
+//0.5e4 filter
+double fofCoefficents5e3[2]={
 
+0.245237275252786,
+-0.509525449494429
+
+};
 
 void initControlRoutines(void){
 	
@@ -39,14 +47,14 @@ pidInit.parameter.Kp=0.1;
 pidInit.parameter.Ki=0.000054/pi_ts;
 pidInit.parameter.atRest=0.0;	
 	
-pidInit.limit.refLimitUp=20.0;
-pidInit.limit.refLimitDown=-20.0;
+pidInit.limit.refLimitUp=40.0;
+pidInit.limit.refLimitDown=-40.0;
 		
 	
 pidInit.limit.rateLimit=200;
 	
-pidInit.limit.outputLimitUp=20.0f;	
-pidInit.limit.outputLimitDown=-20.0f;
+pidInit.limit.outputLimitUp=40.0f;	
+pidInit.limit.outputLimitDown=-40.0f;
 
 pidInit.flag.refLimitEnable=active;
 pidInit.flag.outputLimitEnable=active;
@@ -64,13 +72,13 @@ piqInit.parameter.Kp=0.1;
 piqInit.parameter.Ki=0.000054/pi_ts;
 piqInit.parameter.atRest=0.0;
 
-piqInit.limit.refLimitUp=20.0;
-piqInit.limit.refLimitDown=-20.0;
+piqInit.limit.refLimitUp=40.0;
+piqInit.limit.refLimitDown=-40.0;
 	
-piqInit.limit.rateLimit=20;
+piqInit.limit.rateLimit=200;
 
-piqInit.limit.outputLimitUp=20.0f;	
-piqInit.limit.outputLimitDown=-20.0f;
+piqInit.limit.outputLimitUp=40.0f;	
+piqInit.limit.outputLimitDown=-40.0f;
 
 piqInit.flag.refLimitEnable=active;
 piqInit.flag.outputLimitEnable=active;
@@ -85,17 +93,17 @@ piControllerInitialization(&piqf,piqInit);
 //**************************************
 	
 pidcInit.parameter.ts=pi_ts;
-pidcInit.parameter.Kp=0.5;	
-pidcInit.parameter.Ki=0.0025/pi_ts;;
+pidcInit.parameter.Kp=5;	
+pidcInit.parameter.Ki=0.0005/pi_ts;;
 pidcInit.parameter.atRest=0.0;
 
-pidcInit.limit.refLimitUp=60.0;//cau alter when increasing the voltage
-pidcInit.limit.refLimitDown=90.0;
+pidcInit.limit.refLimitUp=60.0;
+pidcInit.limit.refLimitDown=30.0;
 
 pidcInit.limit.rateLimit=10;
 	
-pidcInit.limit.outputLimitUp=20.0f;	
-pidcInit.limit.outputLimitDown=-20.0f;
+pidcInit.limit.outputLimitUp=40.0f;	
+pidcInit.limit.outputLimitDown=-40.0f;
 
 pidcInit.flag.refLimitEnable=active;
 pidcInit.flag.outputLimitEnable=active;
@@ -161,11 +169,19 @@ void controlRoutines(void){
 					
 					
 	inverseClarkeParkTransform(ipV,&icV,&cOut,scVal);
+
+	FOF(adc.ch.Van,filteredVz.a,filteredV.a,fofCoefficents5e3); 
+	FOF(adc.ch.Vbn,filteredVz.b,filteredV.b,fofCoefficents5e3); 
+	FOF(adc.ch.Vcn,filteredVz.c,filteredV.c,fofCoefficents5e3); 
 	
 	
-	final.a=cOut.a+adc.ch.Van;
-	final.b=cOut.b+adc.ch.Vbn;
-	final.c=cOut.c+adc.ch.Vcn;
+	final.a=cOut.a+filteredV.a;
+	final.b=cOut.b+filteredV.b;
+	final.c=cOut.c+filteredV.c;
+	
+	//final.a=cOut.a-adc.ch.Van;
+	//final.b=cOut.b-adc.ch.Vbn;
+	//final.c=cOut.c-adc.ch.Vcn;
 	
 	
 

@@ -2,7 +2,7 @@
 #define __measurement_H__
 
 #include "mlib.h"
-
+#include "clib.h"
 
 
 void frequencyMeasurement(void);
@@ -33,7 +33,7 @@ typedef enum rmsChannel {   rms_Ia=0,
 }rmsChannel_Type;
 
 extern rmsChannel_Type rmsSeq;
-extern trueRMS_sampled_parameters tRMS[17];
+extern trueRMS_sampled_parameters tRMS[20];
 extern phase_cs_out cs_Aout,cs_Bout,cs_Cout;
 extern sym_out sym;
 extern double dcRipple, dcAverage,Vdcf;
@@ -60,5 +60,51 @@ extern ntcVariables ntcVar;
 void measurement(void);
 
 extern uint16_t calculationCounter;
+
+
+typedef struct recordedVariables{
+	
+
+		double rec_rmsIa;
+		double rec_rmsIb;
+		double rec_rmsIc;
+	
+		double rec_csIa;
+		double rec_csIb;
+		double rec_csIc;
+	
+		double rec_Ia;
+		double rec_Ib;
+		double rec_Ic;
+	
+		double rec_mIa;
+		double rec_mIb;
+		double rec_mIc;
+
+		double rec_rmsVa;
+		double rec_rmsVb;
+		double rec_rmsVc;
+	
+		double rec_Vdc;
+		
+		piData rec_pid;
+		piData rec_piq;
+		piData rec_pidc;
+		
+		park rec_pV;
+		park rec_pI;
+		
+	
+}recordedVariables; 
+
+void recorder();
+
+extern double meanValueIa;
+extern double meanValueIb;
+extern double meanValueIc;
+
+
+extern piData pidf,piqf,pidcf;
+extern park  pV,pI;
 
 #endif

@@ -18,7 +18,7 @@ underLimit_outputParameters underVoltageDC, underVoltageAC;
 void voltageProtectionsInit(void){
 
 
-overVoltageDC_Config.level=100;
+overVoltageDC_Config.level=65;
 overVoltageDC_Config.delay=0.01;
 overVoltageDC_Config.dropout_ratio=0.99;
 overVoltageDC_Config.dropout_time=0.01;
@@ -29,7 +29,7 @@ overVoltageDC_Config.fs=samplingFrequency;
 overLimitInitialization(overVoltageDC_Config,&overVoltageDC);
 
 	
-overVoltageAC_Config.level=50;
+overVoltageAC_Config.level=30;
 overVoltageAC_Config.delay=0.01;
 overVoltageAC_Config.dropout_ratio=0.99;
 overVoltageAC_Config.dropout_time=0.01;
@@ -40,7 +40,7 @@ overVoltageAC_Config.fs=samplingFrequency;
 overLimitInitialization(overVoltageAC_Config,&overVoltageAC);	
 
 
-underVoltageDC_Config.level=15;
+underVoltageDC_Config.level=10;
 underVoltageDC_Config.delay=0.04;
 underVoltageDC_Config.dropout_ratio=1.01;
 underVoltageDC_Config.dropout_time=0.01;
@@ -51,7 +51,7 @@ underVoltageDC_Config.fs=samplingFrequency;
 underLimitInitialization(underVoltageDC_Config,&underVoltageDC);
 
 	
-underVoltageAC_Config.level=10;
+underVoltageAC_Config.level=8;
 underVoltageAC_Config.delay=0.04;
 underVoltageAC_Config.dropout_ratio=1.01;
 underVoltageAC_Config.dropout_time=0.01;
@@ -85,10 +85,11 @@ void voltageProtections(void){
 	inhibitUV=(currentState!=run);
 
 	overLimit(adc.ch.Vdc,overVoltageDC_Config,&overVoltageDC,0,DO.bit.rst);
-	overLimit(max3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),overVoltageAC_Config,&overVoltageAC,0,DO.bit.rst);
+	overLimit(max3p(tRMS[3].out,tRMS[4].out,tRMS[5].out),overVoltageAC_Config,&overVoltageAC,0,DO.bit.rst);
 	
-	//cau underLimit(adc.ch.Vdc,underVoltageDC_Config,&underVoltageDC,inhibitUV,DO.bit.rst); 
-	//cau underLimit(min3p(cs_Aout.V,cs_Bout.V,cs_Cout.V),underVoltageAC_Config,&underVoltageAC,inhibitUV,DO.bit.rst); 
+	underLimit(adc.ch.Vdc,underVoltageDC_Config,&underVoltageDC,inhibitUV,DO.bit.rst); 
+	underLimit(min3p(tRMS[3].out,tRMS[4].out,tRMS[5].out),underVoltageAC_Config,&underVoltageAC,inhibitUV,DO.bit.rst); 
+
 
 
 }

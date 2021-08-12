@@ -31,19 +31,25 @@ static double sosCoefficentsQ[]={
 
 
 
+
+
 void csMeasurement(void){
 	
 	static uint8_t periodCounter=0;
 	
-	//cau in case of time pressure voltage side can be omitted with revised protection part at voltageprotection
 	
-	SOS(adc.ch.Van,cs_Ain.Vc,sosCoefficentsD,sos_pDQ[0]);
-	SOS(adc.ch.Vbn,cs_Bin.Vc,sosCoefficentsD,sos_pDQ[1]);
-	SOS(adc.ch.Vcn,cs_Cin.Vc,sosCoefficentsD,sos_pDQ[2]);
 	
-	SOS(adc.ch.Van,cs_Ain.Vs,sosCoefficentsQ,sos_pDQ[3]);
-	SOS(adc.ch.Vbn,cs_Bin.Vs,sosCoefficentsQ,sos_pDQ[4]);
-	SOS(adc.ch.Vcn,cs_Cin.Vs,sosCoefficentsQ,sos_pDQ[5]);
+	
+	
+
+	
+	//SOS(Vaf,cs_Ain.Vc,sosCoefficentsD,sos_pDQ[0]);
+	//SOS(adc.ch.Vbn,cs_Bin.Vc,sosCoefficentsD,sos_pDQ[1]);
+	//SOS(adc.ch.Vcn,cs_Cin.Vc,sosCoefficentsD,sos_pDQ[2]);
+	
+	//SOS(Vaf,cs_Ain.Vs,sosCoefficentsQ,sos_pDQ[3]);
+	//SOS(adc.ch.Vbn,cs_Bin.Vs,sosCoefficentsQ,sos_pDQ[4]);
+	//SOS(adc.ch.Vcn,cs_Cin.Vs,sosCoefficentsQ,sos_pDQ[5]);
 	
 	
 	SOS(adc.ch.Ia,cs_Ain.Ic,sosCoefficentsD,sos_pDQ[6]);
@@ -54,9 +60,9 @@ void csMeasurement(void){
 	SOS(adc.ch.Ib,cs_Bin.Is,sosCoefficentsQ,sos_pDQ[10]);
 	SOS(adc.ch.Ic,cs_Cin.Is,sosCoefficentsQ,sos_pDQ[11]);
 	
+
 	
 	if(++periodCounter==3){periodCounter=0;}
-	
 	if(periodCounter==0){cs_computations(cs_Ain,&cs_Aout);	}
 	if(periodCounter==1){cs_computations(cs_Bin,&cs_Bout);	}
 	if(periodCounter==2){cs_computations(cs_Cin,&cs_Cout);	}
