@@ -33,7 +33,7 @@ typedef enum rmsChannel {   rms_Ia=0,
 }rmsChannel_Type;
 
 extern rmsChannel_Type rmsSeq;
-extern trueRMS_sampled_parameters tRMS[20];
+extern trueRMS_sampled_parameters tRMS[23];
 extern phase_cs_out cs_Aout,cs_Bout,cs_Cout;
 extern sym_out sym;
 extern double dcRipple, dcAverage,Vdcf;
@@ -94,6 +94,9 @@ typedef struct recordedVariables{
 		park rec_pV;
 		park rec_pI;
 		
+		phase rec_final;
+		phase rec_cOut;
+		
 	
 }recordedVariables; 
 
@@ -106,5 +109,6 @@ extern double meanValueIc;
 
 extern piData pidf,piqf,pidcf;
 extern park  pV,pI;
+extern phase  cOut,final;
 
 #endif

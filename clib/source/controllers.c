@@ -74,6 +74,8 @@ if(pi->flag.enable){
 	
 	pi->state.error=((pi->signal.ref_rateLimited)-(pi->signal.feedback));
 	
+	//pi->state.error=((pi->signal.ref)-(pi->signal.feedback));
+	
 	pi->state.Pout=(pi->parameter.Kp)*(pi->state.error);
 	
 	pi->state.Iout+=(pi->parameter.ts)*(pi->parameter.Ki)*(pi->state.error);

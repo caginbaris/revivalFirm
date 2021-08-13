@@ -67,6 +67,7 @@ if(checked.output){
 	
 
 if(dcRamp){
+
 	
 ref.Vdc+=0.00002;	// increased from init2final in 10 sec
 if(ref.Vdc>ref.Vdc_final){ref.Vdc=ref.Vdc_final,dcRamp=0;}	
@@ -74,7 +75,7 @@ if(ref.Vdc>ref.Vdc_final){ref.Vdc=ref.Vdc_final,dcRamp=0;}
 }
 
 
-
+modulator();
 
 
 if(command.bit.stop){currentState=stopped;}

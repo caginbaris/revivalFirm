@@ -13,7 +13,7 @@
 
 reference ref={0};
 
-static double ref_iz=0,ref_fz=0,Vdf=1.0,Vdz=0;
+static double ref_fz=0;
 
 static double fofCoefficents1e0[2]={
 
@@ -40,7 +40,10 @@ ref.dTermQ=0;
 void references(void){
 	
 	
-	//FOF(pV.d,Vdz,Vdf,fofCoefficents1e2);
+	
+	
+	
+	//FOF(tRMS[rms_Van].out*2.83,ref_fz,ref.Vdc,fofCoefficents1e0);
 	
 	//ref.I = (Vdf > 10.0) ? ref.Q/Vdf : ref.I;
 	

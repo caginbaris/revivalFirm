@@ -5,7 +5,7 @@
 
 rmsChannel_Type rmsSeq=rms_Ia;
 
-trueRMS_sampled_parameters tRMS[20]={
+trueRMS_sampled_parameters tRMS[23]={
 	
 {0,0,0},
 {0,0,1},
@@ -27,6 +27,9 @@ trueRMS_sampled_parameters tRMS[20]={
 {0,0,17},
 {0,0,18},
 {0,0,19},
+{0,0,20},
+{0,0,21},
+{0,0,22},
 
 };
 
@@ -64,5 +67,10 @@ void rmsMeasurement(void){
 		trueRMS_sampled(final.a,&tRMS[17],calculationCounter);
 		trueRMS_sampled(final.b,&tRMS[18],calculationCounter);
 		trueRMS_sampled(final.c,&tRMS[19],calculationCounter);
+		
+		trueRMS_sampled(cOut.a,&tRMS[20],calculationCounter);
+		trueRMS_sampled(cOut.b,&tRMS[21],calculationCounter);
+		trueRMS_sampled(cOut.c,&tRMS[22],calculationCounter);
+
 
 }

@@ -47,14 +47,14 @@ pidInit.parameter.Kp=0.1;
 pidInit.parameter.Ki=0.000054/pi_ts;
 pidInit.parameter.atRest=0.0;	
 	
-pidInit.limit.refLimitUp=40.0;
-pidInit.limit.refLimitDown=-40.0;
+pidInit.limit.refLimitUp=20.0;
+pidInit.limit.refLimitDown=-20.0;
 		
+//cau can be increased	
+pidInit.limit.rateLimit=2000;
 	
-pidInit.limit.rateLimit=200;
-	
-pidInit.limit.outputLimitUp=40.0f;	
-pidInit.limit.outputLimitDown=-40.0f;
+pidInit.limit.outputLimitUp=20.0;	
+pidInit.limit.outputLimitDown=-20.0;
 
 pidInit.flag.refLimitEnable=active;
 pidInit.flag.outputLimitEnable=active;
@@ -72,13 +72,13 @@ piqInit.parameter.Kp=0.1;
 piqInit.parameter.Ki=0.000054/pi_ts;
 piqInit.parameter.atRest=0.0;
 
-piqInit.limit.refLimitUp=40.0;
-piqInit.limit.refLimitDown=-40.0;
+piqInit.limit.refLimitUp=20.0;
+piqInit.limit.refLimitDown=-20.0;
 	
-piqInit.limit.rateLimit=200;
+piqInit.limit.rateLimit=20;
 
-piqInit.limit.outputLimitUp=40.0f;	
-piqInit.limit.outputLimitDown=-40.0f;
+piqInit.limit.outputLimitUp=20.0;	
+piqInit.limit.outputLimitDown=-20.0;
 
 piqInit.flag.refLimitEnable=active;
 piqInit.flag.outputLimitEnable=active;
@@ -102,8 +102,8 @@ pidcInit.limit.refLimitDown=30.0;
 
 pidcInit.limit.rateLimit=10;
 	
-pidcInit.limit.outputLimitUp=40.0f;	
-pidcInit.limit.outputLimitDown=-40.0f;
+pidcInit.limit.outputLimitUp=20.0;	
+pidcInit.limit.outputLimitDown=-20.0;
 
 pidcInit.flag.refLimitEnable=active;
 pidcInit.flag.outputLimitEnable=active;

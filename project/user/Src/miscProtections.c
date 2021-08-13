@@ -68,7 +68,7 @@ void phaseSeqCheck(void){
 	
 	static delay_parameters phaseSeqDelay={0,50000,0};
 	
-	on_delay(sym.V2>sym.V1,&phaseSeqDelay);
+	on_delay(sym.V2>sym.V1*0.25,&phaseSeqDelay);
 	
 	faultWord.bit.phaseSequenceControl=phaseSeqDelay.output;
 	
