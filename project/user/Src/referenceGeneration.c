@@ -13,7 +13,7 @@
 
 reference ref={0};
 
-static double ref_fz=0;
+static double ref_oz=0;
 
 static double fofCoefficents1e0[2]={
 
@@ -40,10 +40,9 @@ ref.dTermQ=0;
 void references(void){
 	
 	
+	ref.I=ref.Iline*1.732;
 	
-	
-	
-	//FOF(tRMS[rms_Van].out*2.83,ref_fz,ref.Vdc,fofCoefficents1e0);
+	FOF((tRMS[rms_Van].out+ref.Iline*0.314)*2.83,ref_oz,ref.Vdc_opt,fofCoefficents1e0);
 	
 	//ref.I = (Vdf > 10.0) ? ref.Q/Vdf : ref.I;
 	
@@ -52,6 +51,11 @@ void references(void){
 	
 	
 								
-	
 
 }
+
+
+
+
+
+

@@ -6,7 +6,7 @@ void initDac(void){
 	
 	
 	  /*##-3- Set DAC Channel1 DHR register ######################################*/
-  if (HAL_DAC_SetValue(&hdac1, DAC1_CHANNEL_1, DAC_ALIGN_8B_R, 33) != HAL_OK)
+  if (HAL_DAC_SetValue(&hdac1, DAC1_CHANNEL_1, DAC_ALIGN_8B_R, 44) != HAL_OK)
   {
     /* Setting value Error */
     Error_Handler();

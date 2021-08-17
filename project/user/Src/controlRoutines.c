@@ -93,11 +93,11 @@ piControllerInitialization(&piqf,piqInit);
 //**************************************
 	
 pidcInit.parameter.ts=pi_ts;
-pidcInit.parameter.Kp=5;	
-pidcInit.parameter.Ki=0.0005/pi_ts;;
+pidcInit.parameter.Kp=0.1;	
+pidcInit.parameter.Ki=0.005/pi_ts;;
 pidcInit.parameter.atRest=0.0;
 
-pidcInit.limit.refLimitUp=60.0;
+pidcInit.limit.refLimitUp=100.0;
 pidcInit.limit.refLimitDown=30.0;
 
 pidcInit.limit.rateLimit=10;

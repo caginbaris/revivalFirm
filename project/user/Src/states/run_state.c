@@ -69,9 +69,14 @@ if(checked.output){
 if(dcRamp){
 
 	
-ref.Vdc+=0.00002;	// increased from init2final in 10 sec
-if(ref.Vdc>ref.Vdc_final){ref.Vdc=ref.Vdc_final,dcRamp=0;}	
+	ref.Vdc+=0.00002;	// increases 1v per sec
 	
+	if(ref.Vdc>ref.Vdc_opt){ref.Vdc=ref.Vdc_opt,dcRamp=0;}	
+	
+}else{
+	
+	ref.Vdc=ref.Vdc_opt;	
+
 }
 
 

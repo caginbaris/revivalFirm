@@ -108,6 +108,7 @@ if(pi->flag.enable){
 		
   pi->state.Iout=pi->signal.atRestOutput;
 	pi->signal.controllerOutput=pi->signal.atRestOutput;
+	pi->signal.ref_rateLimited=pi->signal.ref;	
 
  }
 }
