@@ -72,11 +72,8 @@ if(dcRamp){
 	ref.Vdc+=0.00002;	// increases 1v per sec
 	
 	if(ref.Vdc>ref.Vdc_opt){ref.Vdc=ref.Vdc_opt,dcRamp=0;}	
+	//if(ref.Vdc>ref.Vdc_final){ref.Vdc=ref.Vdc_final,dcRamp=0;}	
 	
-}else{
-	
-	ref.Vdc=ref.Vdc_opt;	
-
 }
 
 

@@ -75,7 +75,7 @@ piqInit.parameter.atRest=0.0;
 piqInit.limit.refLimitUp=20.0;
 piqInit.limit.refLimitDown=-20.0;
 	
-piqInit.limit.rateLimit=20;
+piqInit.limit.rateLimit=1;
 
 piqInit.limit.outputLimitUp=20.0;	
 piqInit.limit.outputLimitDown=-20.0;

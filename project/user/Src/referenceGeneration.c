@@ -25,8 +25,8 @@ static double fofCoefficents1e0[2]={
 void init_references(void){
 
 
-ref.Vdc=35;
-ref.Vdc_final=40;	
+ref.Vdc=56;
+ref.Vdc_final=65;	
 	
 ref.Q=0;
 ref.I=0;		

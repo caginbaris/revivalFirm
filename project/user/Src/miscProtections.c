@@ -43,9 +43,9 @@ void meanCurrentCheck(void){
 	
 	if(faultWord.all==0){
 		
-	faultWord.bit.meanIa=(meanValueIa>2.0);
-	faultWord.bit.meanIb=(meanValueIb>2.0);
-	faultWord.bit.meanIc=(meanValueIc>2.0);
+	//faultWord.bit.meanIa=(meanValueIa>2.0);
+	//faultWord.bit.meanIb=(meanValueIb>2.0);
+	//faultWord.bit.meanIc=(meanValueIc>2.0);
 		
 	}
 	
@@ -58,7 +58,7 @@ void dcRippleCheck(void){
 	
 	on_delay(dcRipple>50.0,&dcRippleDelay); 
 	
-	faultWord.bit.dcRippleOverLimit=dcRippleDelay.output;
+	//faultWord.bit.dcRippleOverLimit=dcRippleDelay.output;
 	
 
 }
@@ -70,7 +70,7 @@ void phaseSeqCheck(void){
 	
 	on_delay(sym.V2>sym.V1*0.25,&phaseSeqDelay);
 	
-	faultWord.bit.phaseSequenceControl=phaseSeqDelay.output;
+	//faultWord.bit.phaseSequenceControl=phaseSeqDelay.output;
 	
 
 }

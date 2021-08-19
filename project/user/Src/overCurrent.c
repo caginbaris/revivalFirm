@@ -34,7 +34,7 @@ overLimitInitialization(overCurrentRMS_Config,&overCurrentRMS_L2);
 overLimitInitialization(overCurrentRMS_Config,&overCurrentRMS_L3);	
 	
 	
-overCurrentCS_Config.level=10;
+overCurrentCS_Config.level=12;
 overCurrentCS_Config.delay=0.01;
 overCurrentCS_Config.dropout_ratio=0.99;
 overCurrentCS_Config.dropout_time=0.001;
