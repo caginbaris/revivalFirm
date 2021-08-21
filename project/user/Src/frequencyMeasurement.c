@@ -6,7 +6,7 @@
 
 double fundamentalFrequency=0;
 static delay_parameters p={0,100,0};
-static delay_parameters freqCheck={0,2000,0};
+static delay_parameters freqCheck={0,4000,0};
 static transition_parameters t={0,0};
 
 
@@ -43,9 +43,9 @@ void frequencyDetect(double input,double *output,double samplingFrequency){
 void frequencyMeasurement(void){
 
 	frequencyDetect(adc.ch.Van,&fundamentalFrequency,50000.0);
-	on_delay((fundamentalFrequency>51.0 || fundamentalFrequency<49.0),&freqCheck);
-	//faultWord.bit.gridFrequency=freqCheck.output;
+	on_delay((fundamentalFrequency<48.0 || fundamentalFrequency>52.0),&freqCheck);
 	
+	if(freqCheck.output){faultWord.bit.gridFrequency=1;}
 	
 
 }

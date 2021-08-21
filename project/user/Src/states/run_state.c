@@ -77,6 +77,13 @@ if(dcRamp){
 }
 
 
+if(dcRamp==0 && LED.out._3==1){
+
+ref.Vdc=ref.Vdc_opt;
+
+}
+
+
 modulator();
 
 

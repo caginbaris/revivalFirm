@@ -15,10 +15,10 @@ digitalOutputs DO={0};
 	
 delay_parameters inputDelay[inputNo]={
 
-{0,2,0},
-{0,2,0},
-{0,2,0},
-{0,inputDelayQualSample,0},
+{0,3,0},
+{0,10,0},// HB2 misfired fault output
+{0,3,0},
+{0,3,0},
 {0,inputDelayQualSample,0},
 {0,inputDelayQualSample,0},
 {0,inputDelayQualSample,0},
@@ -39,16 +39,17 @@ void ios(void){
 	
 //inputs
 
-on_delay(HAL_GPIO_ReadPin(HB1_FLT_GPIO_Port,HB1_FLT_Pin),&inputDelay[0]);
-on_delay(HAL_GPIO_ReadPin(HB2_FLT_GPIO_Port,HB2_FLT_Pin),&inputDelay[1]);
-on_delay(HAL_GPIO_ReadPin(HB3_FLT_GPIO_Port,HB3_FLT_Pin),&inputDelay[2]);
+on_off_delay(HAL_GPIO_ReadPin(HB1_FLT_GPIO_Port,HB1_FLT_Pin),&inputDelay[0]);
+on_off_delay(HAL_GPIO_ReadPin(HB2_FLT_GPIO_Port,HB2_FLT_Pin),&inputDelay[1]);
+on_off_delay(HAL_GPIO_ReadPin(HB3_FLT_GPIO_Port,HB3_FLT_Pin),&inputDelay[2]);
+on_off_delay(HAL_GPIO_ReadPin(PWRGD_24v_GPIO_Port,PWRGD_24v_Pin),&inputDelay[3]);
 
-on_off_delay(HAL_GPIO_ReadPin(PWRGD_3v3_GPIO_Port,PWRGD_3v3_Pin),&inputDelay[3]);
-on_off_delay(HAL_GPIO_ReadPin(PWRGD_24v_GPIO_Port,PWRGD_24v_Pin),&inputDelay[4]);
-on_off_delay(HAL_GPIO_ReadPin(extInput_GPIO_Port,extInput_Pin),&inputDelay[5]);
+//on_off_delay(HAL_GPIO_ReadPin(PWRGD_3v3_GPIO_Port,PWRGD_3v3_Pin),&inputDelay[3]);
+
+//on_off_delay(HAL_GPIO_ReadPin(extInput_GPIO_Port,extInput_Pin),&inputDelay[5]);
 
 //on_off_delay(HAL_GPIO_ReadPin(MCB_in_check_GPIO_Port,MCB_in_check_Pin),&inputDelay[6]);
-on_off_delay(HAL_GPIO_ReadPin(PBin_GPIO_Port,PBin_Pin),&inputDelay[7]);
+//on_off_delay(HAL_GPIO_ReadPin(PBin_GPIO_Port,PBin_Pin),&inputDelay[7]);
 
 //off_delay(HAL_GPIO_ReadPin(HB1pIn_GPIO_Port,HB1pIn_Pin),&inputDelay[8]);
 //off_delay(HAL_GPIO_ReadPin(HB2pIn_GPIO_Port,HB2pIn_Pin),&inputDelay[9]);
@@ -73,6 +74,7 @@ HAL_GPIO_WritePin(MCB_in_GPIO_Port,MCB_in_Pin,(GPIO_PinState)DO.bit.mcb_in);
 DI.bit.hb1_fault=inputDelay[0].output;
 DI.bit.hb2_fault=inputDelay[1].output;
 DI.bit.hb3_fault=inputDelay[2].output;
+DI.bit.pwrgd_24v=inputDelay[3].output;
 
 HAL_GPIO_WritePin(HB_RST_GPIO_Port,HB_RST_Pin,(GPIO_PinState)!DO.bit.rst);
 

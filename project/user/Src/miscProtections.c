@@ -5,6 +5,9 @@
 #include "faultHandling.h"
 #include "states.h"
 
+#define meanCurrentThreshold 1.0
+#define dcRippleThreshold 1.0
+
 double meanValueIa=0;
 double meanValueIb=0;
 double meanValueIc=0;
@@ -41,13 +44,11 @@ void meanCurrentCheck(void){
 		
 	}
 	
-	if(faultWord.all==0){
-		
-	//faultWord.bit.meanIa=(meanValueIa>2.0);
-	//faultWord.bit.meanIb=(meanValueIb>2.0);
-	//faultWord.bit.meanIc=(meanValueIc>2.0);
-		
-	}
+	
+	if(meanValueIa>meanCurrentThreshold){faultWord.bit.meanIa=1;}
+	if(meanValueIb>meanCurrentThreshold){faultWord.bit.meanIb=1;}
+	if(meanValueIc>meanCurrentThreshold){faultWord.bit.meanIc=1;}
+
 	
 }
 
@@ -56,9 +57,9 @@ void dcRippleCheck(void){
 	
 	static delay_parameters dcRippleDelay={0,50000,0};
 	
-	on_delay(dcRipple>50.0,&dcRippleDelay); 
+	on_delay(dcRipple>dcRippleThreshold,&dcRippleDelay); 
 	
-	//faultWord.bit.dcRippleOverLimit=dcRippleDelay.output;
+	if(dcRippleDelay.output){faultWord.bit.dcRippleOverLimit=1;}
 	
 
 }
@@ -70,7 +71,7 @@ void phaseSeqCheck(void){
 	
 	on_delay(sym.V2>sym.V1*0.25,&phaseSeqDelay);
 	
-	//faultWord.bit.phaseSequenceControl=phaseSeqDelay.output;
+	if(phaseSeqDelay.output){faultWord.bit.phaseSequenceControl=1;}
 	
 
 }
@@ -84,7 +85,7 @@ void miscProtections(){
 	meanCurrentCheck();
 	dcRippleCheck();
 	
-	if(currentState!=run){phaseSeqCheck();}
+	//cau not active for now if(currentState!=run){phaseSeqCheck();}
 	
 
 }

@@ -43,14 +43,14 @@ void initControlRoutines(void){
 //**************************************
 	
 pidInit.parameter.ts=pi_ts;
-pidInit.parameter.Kp=0.1;	
-pidInit.parameter.Ki=0.000054/pi_ts;
+pidInit.parameter.Kp=0.2;	
+pidInit.parameter.Ki=0.000108/pi_ts;
 pidInit.parameter.atRest=0.0;	
 	
 pidInit.limit.refLimitUp=20.0;
 pidInit.limit.refLimitDown=-20.0;
 		
-//cau can be increased	
+
 pidInit.limit.rateLimit=2000;
 	
 pidInit.limit.outputLimitUp=20.0;	
@@ -68,14 +68,14 @@ piControllerInitialization(&pidf,pidInit);
 //**************************************
 	
 piqInit.parameter.ts=pi_ts;
-piqInit.parameter.Kp=0.1;	
-piqInit.parameter.Ki=0.000054/pi_ts;
+piqInit.parameter.Kp=0.2;	
+piqInit.parameter.Ki=0.000108/pi_ts;
 piqInit.parameter.atRest=0.0;
 
 piqInit.limit.refLimitUp=20.0;
 piqInit.limit.refLimitDown=-20.0;
 	
-piqInit.limit.rateLimit=1;
+piqInit.limit.rateLimit=1.732;
 
 piqInit.limit.outputLimitUp=20.0;	
 piqInit.limit.outputLimitDown=-20.0;
@@ -97,7 +97,7 @@ pidcInit.parameter.Kp=0.1;
 pidcInit.parameter.Ki=0.005/pi_ts;;
 pidcInit.parameter.atRest=0.0;
 
-pidcInit.limit.refLimitUp=100.0;
+pidcInit.limit.refLimitUp=200.0;
 pidcInit.limit.refLimitDown=30.0;
 
 pidcInit.limit.rateLimit=10;

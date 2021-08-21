@@ -9,14 +9,6 @@ static double Vdcz=0;
 
 
 
-//1e1 filter
-static double sosCoefficentsDC[]={
-
-0.000000394433639694380,   0.000000788867279388761,   0.000000394433639694380,
--1.998222847291842,   0.998224425026401
-
-};
-
 //1e2 filter
 double fofCoefficents1e2[2]={
 
@@ -25,15 +17,22 @@ double fofCoefficents1e2[2]={
 
 };
 
+double fofCoefficents2e1[2]={
+
+0.001255060566451,
+-0.997489878867098
+
+};
 
 
 
 void dcMeasurement(void){
 	
 	
-SOS(adc.ch.Vdc,dcAverage,sosCoefficentsDC,sos_pDC);
-dcRipple=adc.ch.Vdc-dcAverage; 
-FOF(adc.ch.Vdc,Vdcz,Vdcf,fofCoefficents1e2); 
+//SOS(adc.ch.Vdc,dcAverage,sosCoefficentsDC,sos_pDC);
+FOF(adc.ch.Vdc,Vdcz,Vdcf,fofCoefficents2e1); 	
+dcRipple=adc.ch.Vdc-Vdcf; 
+//FOF(adc.ch.Vdc,Vdcz,Vdcf,fofCoefficents1e2); 
 
 
 
